@@ -6,12 +6,12 @@ const Settings = {
   RENTAL_OFFERS_COUNT: 312
 };
 
-const placeCardName = [
+const offerTitles = [
   `Beautiful & luxurious apartment at great location`,
   `Wood and stone place`
 ];
 
 ReactDOM.render(
-    <App rentalCount={Settings.RENTAL_OFFERS_COUNT} placeCardName={placeCardName}/>,
+    <App offersCount={Settings.RENTAL_OFFERS_COUNT} offerTitles={offerTitles}/>,
     document.querySelector(`#root`)
 );

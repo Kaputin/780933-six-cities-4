@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
-const App = ({rentalCount, placeCardName}) => {
+const App = ({offersCount, offerTitles}) => {
 
   return (
-    <Main rentalCount={rentalCount} placeCardName={placeCardName} />
+    <Main offersCount={offersCount} offerTitles={offerTitles} />
   );
 };
 
 App.propTypes = {
-  rentalCount: PropTypes.number.isRequired,
-  placeCardName: PropTypes.array.isRequired,
+  offersCount: PropTypes.number.isRequired,
+  offerTitles: PropTypes.array.isRequired,
 };
 
 export default App;

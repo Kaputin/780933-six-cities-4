@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Main = ({rentalCount, placeCardName}) => {
+const Main = ({offersCount, offerTitles}) => {
 
   return (
     <main className="page__main page__main--index">
@@ -46,7 +46,7 @@ const Main = ({rentalCount, placeCardName}) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{rentalCount} places to stay in Amsterdam</b>
+            <b className="places__found">{offersCount} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -63,7 +63,7 @@ const Main = ({rentalCount, placeCardName}) => {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {placeCardName.map((placeName, index) => (
+              {offerTitles.map((offerTitle, index) => (
                 <article className="cities__place-card place-card" key={index}>
                   <div className="place-card__mark">
                     <span>Premium</span>
@@ -93,7 +93,7 @@ const Main = ({rentalCount, placeCardName}) => {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">{placeName}</a>
+                      <a href="#">{offerTitle}</a>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
@@ -111,8 +111,8 @@ const Main = ({rentalCount, placeCardName}) => {
 };
 
 Main.propTypes = {
-  rentalCount: PropTypes.number.isRequired,
-  placeCardName: PropTypes.array.isRequired,
+  offersCount: PropTypes.number.isRequired,
+  offerTitles: PropTypes.array.isRequired,
 };
 
 export default Main;
