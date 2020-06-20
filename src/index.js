@@ -6,7 +6,12 @@ const Settings = {
   RENTAL_OFFERS_COUNT: 312
 };
 
+const offerTitles = [
+  `Beautiful & luxurious apartment at great location`,
+  `Wood and stone place`
+];
+
 ReactDOM.render(
-    <App rentalOffersCount={Settings.RENTAL_OFFERS_COUNT} />,
+    <App offersCount={Settings.RENTAL_OFFERS_COUNT} offerTitles={offerTitles}/>,
     document.querySelector(`#root`)
 );
