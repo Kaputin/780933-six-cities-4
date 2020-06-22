@@ -13,37 +13,23 @@ const offerTitles = [
   `Wood and stone place`
 ];
 
-// it(`Should offer title be pressed`, () => {
-//   const onOfferTitleClick = jest.fn();
-//
-//   const main = shallow(
-//       <Main
-//         offersCount={offersCount}
-//         offerTitles={offerTitles}
-//         onOfferTitleClick={onOfferTitleClick}
-//       />
-//   );
-//   main.find(`h2.place-card__name`).forEach((offerTitle) => {
-//     offerTitle.simulate(`click`);
-//   });
-//
-//   expect(onOfferTitleClick.mock.calls.length).toBe(offerTitles.length);
-// });
+const onOfferTitleClick = jest.fn();
 
-it(`Should offer title be pressed`, () => {
-  const onOfferTitleClick = jest.fn();
+describe(`Render App`, () => {
+  it(`Should offer title be pressed`, () => {
 
-  const main = shallow(
-      <Main
-        offersCount={offersCount}
-        offerTitles={offerTitles}
-        onOfferTitleClick={onOfferTitleClick}
-      />
-  );
+    const main = shallow(
+        <Main
+          offersCount={offersCount}
+          offerTitles={offerTitles}
+          onOfferTitleClick={onOfferTitleClick}
+        />
+    );
 
-  const offerTitle = main.find(`h2.place-card__name`);
+    const offerTitle = main.find(`h2.place-card__name`);
 
-  offerTitle.first().simulate(`click`);
+    offerTitle.first().simulate(`click`);
 
-  expect(onOfferTitleClick.mock.calls.length).toBe(1);
+    expect(onOfferTitleClick).toHaveBeenCalled();
+  });
 });
