@@ -1,9 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import {Main} from "./main.jsx";
-
-const offersCount = 312;
-const offers = [
+export default [
   {
     id: 1,
     type: `Apartment`,
@@ -38,15 +33,3 @@ const offers = [
     title: `Nice, cozy, warm big bed apartment`
   }
 ];
-
-it(`Should Main render correctly`, () => {
-  const tree = renderer
-    .create(<Main
-      offersCount={offersCount}
-      offers={offers}
-      onOfferTitleClick={() => {}}
-    />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});

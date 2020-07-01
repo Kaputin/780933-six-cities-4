@@ -1,19 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Main from "../main/main.jsx";
+import {Main} from "../main/main.jsx";
 
 const offerTitleHandler = () => {};
 
-const App = ({offersCount, offerTitles}) => {
+export const App = ({offersCount, offers}) => {
 
   return (
-    <Main offersCount={offersCount} offerTitles={offerTitles} onOfferTitleClick={offerTitleHandler} />
+    <Main offersCount={offersCount} offers={offers} onOfferTitleClick={offerTitleHandler} />
   );
 };
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offerTitles: PropTypes.array.isRequired,
+  offers: PropTypes.array.isRequired,
 };
-
-export default App;
