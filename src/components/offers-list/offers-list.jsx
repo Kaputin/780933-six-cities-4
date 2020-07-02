@@ -23,7 +23,14 @@ export class OffersList extends PureComponent {
     const {onOfferTitleClick, offers} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => <PlaceCard onOfferTitleClick={onOfferTitleClick} onOfferTarget={this.handleOfferTarget} offer={offer} key={offer.id} />)}
+        {offers.map((offer) =>
+          <PlaceCard
+            onOfferTitleClick={onOfferTitleClick}
+            onOfferTarget={this.handleOfferTarget}
+            offer={offer}
+            key={offer.id}
+          />)
+        }
       </div>
     );
   }
