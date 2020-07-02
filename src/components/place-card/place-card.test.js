@@ -12,11 +12,11 @@ const offer = {
   title: `Beautiful & luxurious apartment at great location`
 };
 
-it(`Should Place card render correctly`, () => {
+it(`Should PlaceCard render correctly`, () => {
   const tree = renderer
     .create(<PlaceCard
       onOfferTitleClick={() => {}}
-      onOfferTarget={() => {}}
+      onOfferMouseEnter={() => {}}
       offer={offer}
       key={offer.id}
     />)

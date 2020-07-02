@@ -18,7 +18,7 @@ const offer = {
 };
 
 const onOfferTitleClick = jest.fn();
-const onOfferTarget = jest.fn();
+const onOfferMouseEnter = jest.fn();
 
 describe(`Offer title e2e`, () => {
   it(`Should offer title be pressed`, () => {
@@ -26,7 +26,7 @@ describe(`Offer title e2e`, () => {
     const placeCard = shallow(
         <PlaceCard
           onOfferTitleClick={onOfferTitleClick}
-          onOfferTarget={onOfferTarget}
+          onOfferMouseEnter={onOfferMouseEnter}
           offer={offer}
         />
     );
@@ -45,7 +45,7 @@ describe(`Offer target e2e`, () => {
     const placeCard = shallow(
         <PlaceCard
           onOfferTitleClick={onOfferTitleClick}
-          onOfferTarget={onOfferTarget}
+          onOfferMouseEnter={onOfferMouseEnter}
           offer={offer}
         />
     );
@@ -54,6 +54,6 @@ describe(`Offer target e2e`, () => {
 
     placeCardComponent.simulate(`mouseenter`);
 
-    expect(onOfferTarget).toHaveBeenCalled();
+    expect(onOfferMouseEnter).toHaveBeenCalled();
   });
 });

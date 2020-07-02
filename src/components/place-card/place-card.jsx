@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {offerProp} from "../../propTypes.js";
 
-export const PlaceCard = ({onOfferTitleClick, onOfferTarget, offer}) => {
+export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
   const {
     mark,
     src,
@@ -14,13 +15,13 @@ export const PlaceCard = ({onOfferTitleClick, onOfferTarget, offer}) => {
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={() => {
-        onOfferTarget(offer);
+        onOfferMouseEnter(offer);
       }}>
       {mark
         ? <div className="place-card__mark"><span>Premium</span></div>
         : ``
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className="place-card__image-wrapper cities__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={src} width="260" height="200" alt="Place image"/>
         </a>
@@ -56,13 +57,6 @@ export const PlaceCard = ({onOfferTitleClick, onOfferTarget, offer}) => {
 
 PlaceCard.propTypes = {
   onOfferTitleClick: PropTypes.func.isRequired,
-  onOfferTarget: PropTypes.func.isRequired,
-  offer: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    mark: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    src: PropTypes.string.isRequired,
-    rating: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+  onOfferMouseEnter: PropTypes.func.isRequired,
+  offer: offerProp,
 };

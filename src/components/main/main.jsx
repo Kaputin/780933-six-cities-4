@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OffersList} from "../offers-list/offers-list.jsx";
+import {offerProp} from "../../propTypes.js";
 
 export const Main = ({offersCount, offers, onOfferTitleClick}) => {
 
@@ -76,6 +77,6 @@ export const Main = ({offersCount, offers, onOfferTitleClick}) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired
 };

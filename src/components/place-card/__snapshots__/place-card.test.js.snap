@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Place card render correctly 1`] = `
+exports[`Should PlaceCard render correctly 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
@@ -13,7 +13,7 @@ exports[`Should Place card render correctly 1`] = `
     </span>
   </div>
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="place-card__image-wrapper cities__image-wrapper"
   >
     <a
       href="#"

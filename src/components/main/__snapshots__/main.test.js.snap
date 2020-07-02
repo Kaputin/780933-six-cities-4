@@ -181,7 +181,7 @@ exports[`Should Main render correctly 1`] = `
               </span>
             </div>
             <div
-              className="cities__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
                 href="#"
@@ -279,7 +279,7 @@ exports[`Should Main render correctly 1`] = `
           >
             
             <div
-              className="cities__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
                 href="#"
@@ -377,7 +377,7 @@ exports[`Should Main render correctly 1`] = `
           >
             
             <div
-              className="cities__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
                 href="#"
@@ -481,7 +481,7 @@ exports[`Should Main render correctly 1`] = `
               </span>
             </div>
             <div
-              className="cities__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
                 href="#"

@@ -1,21 +1,21 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
+import {offerProp} from "../../propTypes.js";
 
 export class OffersList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleOfferTarget = this.handleOfferTarget.bind(this);
-
+    this.handleSelect = this.handleSelect.bind(this);
     this.state = {
-      targetOffer: null,
+      selectedOffer: null,
     };
   }
 
-  handleOfferTarget(offer) {
+  handleSelect(offer) {
     this.setState({
-      targetOffer: offer
+      selectedOffer: offer
     });
   }
 
@@ -26,7 +26,7 @@ export class OffersList extends PureComponent {
         {offers.map((offer) =>
           <PlaceCard
             onOfferTitleClick={onOfferTitleClick}
-            onOfferTarget={this.handleOfferTarget}
+            onOfferMouseEnter={this.handleSelect}
             offer={offer}
             key={offer.id}
           />)
@@ -37,6 +37,6 @@ export class OffersList extends PureComponent {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
