@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Offers list render correctly 1`] = `
+exports[`Should OffersList render correctly 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 >
@@ -112,7 +112,6 @@ exports[`Should Offers list render correctly 1`] = `
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
   >
-    
     <div
       className="place-card__image-wrapper cities__image-wrapper"
     >
@@ -210,7 +209,6 @@ exports[`Should Offers list render correctly 1`] = `
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
   >
-    
     <div
       className="place-card__image-wrapper cities__image-wrapper"
     >

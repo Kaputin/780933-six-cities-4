@@ -38,7 +38,7 @@ const offers = [
   }
 ];
 
-it(`Should Offers list render correctly`, () => {
+it(`Should OffersList render correctly`, () => {
   const tree = renderer
     .create(<OffersList
       onOfferTitleClick={() => {}}

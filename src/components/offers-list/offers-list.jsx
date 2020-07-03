@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
-import {offerProp} from "../../propTypes.js";
+import {OfferPropTypes} from "../../propTypes.js";
 
 export class OffersList extends PureComponent {
   constructor(props) {
@@ -37,6 +37,6 @@ export class OffersList extends PureComponent {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };

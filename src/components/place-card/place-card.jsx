@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {offerProp} from "../../propTypes.js";
+import {OfferPropTypes} from "../../propTypes.js";
 
 export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
   const {
@@ -12,15 +12,13 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
     type
   } = offer;
 
+  const handleMouseEnter = (selectedOffer) => {
+    onOfferMouseEnter(selectedOffer);
+  };
+
   return (
-    <article className="cities__place-card place-card"
-      onMouseEnter={() => {
-        onOfferMouseEnter(offer);
-      }}>
-      {mark
-        ? <div className="place-card__mark"><span>Premium</span></div>
-        : ``
-      }
+    <article className="cities__place-card place-card" onMouseEnter={handleMouseEnter}>
+      {mark && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="place-card__image-wrapper cities__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={src} width="260" height="200" alt="Place image"/>
@@ -58,5 +56,5 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
 PlaceCard.propTypes = {
   onOfferTitleClick: PropTypes.func.isRequired,
   onOfferMouseEnter: PropTypes.func.isRequired,
-  offer: offerProp,
+  offer: OfferPropTypes,
 };
