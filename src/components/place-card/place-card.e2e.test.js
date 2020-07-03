@@ -40,7 +40,7 @@ describe(`PlaceCard e2e tests`, () => {
 });
 
 describe(`Offer select e2e`, () => {
-  it(`Should offer be targeted`, () => {
+  it(`Should Offer be selected`, () => {
 
     const placeCard = shallow(
         <PlaceCard
