@@ -1,8 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main.jsx";
+import {OffersList} from "./offers-list.jsx";
 
-const offersCount = 312;
 const offers = [
   {
     id: 1,
@@ -39,12 +38,11 @@ const offers = [
   }
 ];
 
-it(`Should Main render correctly`, () => {
+it(`Should OffersList render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      offersCount={offersCount}
-      offers={offers}
+    .create(<OffersList
       onOfferTitleClick={() => {}}
+      offers={offers}
     />)
     .toJSON();
 
