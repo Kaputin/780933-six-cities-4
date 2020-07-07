@@ -1,8 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main.jsx";
+import {Map} from "./map.jsx";
 
-const offersCount = 312;
 const offers = [
   {
     id: 1,
@@ -43,13 +42,11 @@ const offers = [
   }
 ];
 
-it(`Should Main render correctly`, () => {
+it(`Should Map render correctly`, () => {
 
   const tree = renderer
-    .create(<Main
-      offersCount={offersCount}
+    .create(<Map
       offers={offers}
-      onOfferTitleClick={() => {}}
     />,
     {
       createNodeMock: () => document.createElement(`div`)

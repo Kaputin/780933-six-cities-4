@@ -8,4 +8,5 @@ export const OfferPropTypes = PropTypes.shape({
   src: PropTypes.string.isRequired,
   rating: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
 }).isRequired;
