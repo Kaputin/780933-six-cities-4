@@ -12,6 +12,10 @@ export class Map extends PureComponent {
     this.city = [52.38333, 4.9];
     this.zoom = 12;
     this.map = null;
+    this.icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [27, 39]
+    });
   }
 
   componentDidMount() {
@@ -38,16 +42,13 @@ export class Map extends PureComponent {
 
   _createMarkers() {
     const {offers} = this.props;
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [27, 39]
-    });
+
 
     offers.forEach((offer) => {
       const offerCords = offer.coordinates;
       if (offerCords.length) {
         leaflet
-        .marker(offerCords, {icon})
+        .marker(offerCords, this.icon)
         .addTo(this.map);
       }
     });
