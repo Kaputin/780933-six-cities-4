@@ -14,7 +14,8 @@ const offer = {
   price: 120,
   src: `img/apartment-01.jpg`,
   rating: {width: `80%`},
-  title: `Beautiful & luxurious apartment at great location`
+  title: `Beautiful & luxurious apartment at great location`,
+  coordinates: [52.3909553943508, 4.85309666406198]
 };
 
 const onOfferTitleClick = jest.fn();
