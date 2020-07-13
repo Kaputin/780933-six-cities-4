@@ -7,9 +7,8 @@ import {OfferPropTypes} from "../../propTypes.js";
 export class Map extends PureComponent {
   constructor(props) {
     super(props);
-
+    this.markers = [];
     this.mapRef = React.createRef();
-    this.city = [52.38333, 4.9];
     this.zoom = 12;
     this.map = null;
     this.icon = leaflet.icon({
@@ -23,15 +22,33 @@ export class Map extends PureComponent {
     this._createMarkers();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedCoordinates !== prevProps.selectedCoordinates || this.props.offers !== prevProps.offers) {
+      this._updateMap();
+      this._removeMarkers();
+      this._createMarkers();
+    }
+  }
+
+  _removeMarkers() { // пока не удаляет прочесть документацию
+    this.markers.forEach((marker) => marker.remove());
+  }
+
+  _updateMap() {
+    const {selectedCoordinates} = this.props;
+    this.map.setView(selectedCoordinates, this.zoom);
+  }
+
   _initializeMap() {
+    const {selectedCoordinates} = this.props;
     this.map = leaflet.map(this.mapRef.current, {
-      center: this.city,
+      center: selectedCoordinates,
       zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(this.city, this.zoom);
+    this.map.setView(selectedCoordinates, this.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -43,13 +60,13 @@ export class Map extends PureComponent {
   _createMarkers() {
     const {offers} = this.props;
 
-
     offers.forEach((offer) => {
       const offerCords = offer.coordinates;
       if (offerCords.length) {
         leaflet
         .marker(offerCords, this.icon)
         .addTo(this.map);
+        this.markers.push(leaflet.marker(offerCords, this.icon));
       }
     });
   }
@@ -62,5 +79,6 @@ export class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired
+  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  selectedCoordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
