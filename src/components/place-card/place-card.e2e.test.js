@@ -9,6 +9,7 @@ Enzyme.configure({
 
 const offer = {
   id: 1,
+  city: `Amsterdam`,
   type: `Apartment`,
   mark: true,
   price: 120,
