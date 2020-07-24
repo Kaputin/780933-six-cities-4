@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {PlaceCard} from "./place-card.jsx";
+import {Property} from "./property.jsx";
 
 const offer = {
   id: 1,
@@ -18,13 +18,10 @@ const offer = {
   coordinates: [52.3909553943508, 4.85309666406198]
 };
 
-it(`Should PlaceCard render correctly`, () => {
+it(`Should Property render correctly`, () => {
   const tree = renderer
-    .create(<PlaceCard
-      onOfferTitleClick={() => {}}
-      onOfferMouseEnter={() => {}}
+    .create(<Property
       offer={offer}
-      key={offer.id}
     />)
     .toJSON();
 

@@ -5,7 +5,7 @@ import {Map} from "../map/map.jsx";
 import {CitiesList} from "../cities-list/cities-list.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 
-export const Main = ({offersCount, offers, cities, selectedCity, selectedCoordinates, onCityTitleClick, onOfferTitleClick}) => {
+export const Main = ({offersCount, offers, cities, selectedCity, onCityTitleClick, onOfferTitleClick}) => {
 
   return (
     <main className="page__main page__main--index">
@@ -19,7 +19,7 @@ export const Main = ({offersCount, offers, cities, selectedCity, selectedCoordin
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offersCount} places to stay in {selectedCity}</b>
+            <b className="places__found">{offersCount} places to stay in {selectedCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -38,7 +38,7 @@ export const Main = ({offersCount, offers, cities, selectedCity, selectedCoordin
             {<OffersList onOfferTitleClick={onOfferTitleClick} offers={offers} />}
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map">{<Map selectedCoordinates={selectedCoordinates} offers={offers} />}</section>
+            <section className="cities__map map">{<Map selectedCity={selectedCity} offers={offers} />}</section>
           </div>
         </div>
       </div>
@@ -50,8 +50,7 @@ Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   cities: PropTypes.arrayOf(CityPropTypes).isRequired,
-  selectedCity: PropTypes.string.isRequired,
-  selectedCoordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedCity: CityPropTypes,
   onOfferTitleClick: PropTypes.func.isRequired,
   onCityTitleClick: PropTypes.func.isRequired
 };

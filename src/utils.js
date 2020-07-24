@@ -3,8 +3,9 @@ export const extend = (a, b) => {
 };
 
 export const getDefaultCity = (citiesList) => {
-  return citiesList[4].title;
+  return citiesList[0];
 };
 
-export const getOffersByCities = (offersList, selectedCity) => offersList.filter((offer) => offer.city === selectedCity);
-export const getCoordinatesByCities = (cities, selectedCity) => cities.find((city) => city.title === selectedCity).coordinates;
+export const getOffersByCities = (offersList, selectedCity) => offersList.filter((offer) => offer.city === selectedCity.title);
+export const getCoordinatesByCities = (cities, selectedCity) => cities.find((city) => city.title === selectedCity.title).coordinates;
+// export const getCityById = (cities, id) => cities.find((city) => city.id === id); // потом уберу оставил, чтобы не забыть

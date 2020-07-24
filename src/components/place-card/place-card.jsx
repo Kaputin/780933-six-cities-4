@@ -7,7 +7,7 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
     mark,
     src,
     price,
-    rating,
+    stars,
     title,
     type
   } = offer;
@@ -39,11 +39,11 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={rating}></span>
+            <span style={stars}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onOfferTitleClick}>
+        <h2 className="place-card__name" onClick={() => onOfferTitleClick(offer)}>
           <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>

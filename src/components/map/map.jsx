@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../../propTypes.js";
+import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 
 
 export class Map extends PureComponent {
@@ -15,6 +15,7 @@ export class Map extends PureComponent {
       iconUrl: `img/pin.svg`,
       iconSize: [27, 39]
     });
+
   }
 
   componentDidMount() {
@@ -23,7 +24,7 @@ export class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedCoordinates !== prevProps.selectedCoordinates || this.props.offers !== prevProps.offers) {
+    if (this.props.selectedCity !== prevProps.selectedCity || this.props.offers !== prevProps.offers) {
       this._updateMap();
       this._removeMarkers();
       this._createMarkers();
@@ -31,24 +32,28 @@ export class Map extends PureComponent {
   }
 
   _removeMarkers() { // пока не удаляет прочесть документацию
-    this.markers.forEach((marker) => marker.remove());
+    while (this.markers.length > 0) {
+      this.map.removeLayer(this.markers.pop());
+    }
+    // this.markers.forEach((marker) => this.map.removeLayer(marker));
+    // удалять прям слой, сохранять ссылку
   }
 
   _updateMap() {
-    const {selectedCoordinates} = this.props;
-    this.map.setView(selectedCoordinates, this.zoom);
+    const {selectedCity} = this.props;
+    this.map.setView(selectedCity.coordinates, this.zoom);
   }
 
   _initializeMap() {
-    const {selectedCoordinates} = this.props;
+    const {selectedCity} = this.props;
     this.map = leaflet.map(this.mapRef.current, {
-      center: selectedCoordinates,
+      center: selectedCity.coordinates,
       zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(selectedCoordinates, this.zoom);
+    this.map.setView(selectedCity.coordinates, this.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -59,14 +64,16 @@ export class Map extends PureComponent {
 
   _createMarkers() {
     const {offers} = this.props;
+    this.markers = [];
 
     offers.forEach((offer) => {
       const offerCords = offer.coordinates;
       if (offerCords.length) {
-        leaflet
+        const marker = leaflet
         .marker(offerCords, this.icon)
         .addTo(this.map);
-        this.markers.push(leaflet.marker(offerCords, this.icon));
+
+        this.markers.push(marker);
       }
     });
   }
@@ -80,5 +87,5 @@ export class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  selectedCoordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedCity: CityPropTypes,
 };
