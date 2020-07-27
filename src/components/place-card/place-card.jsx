@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../../propTypes.js";
 
-export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
+export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer, cardClass, wrapperClass}) => {
   const {
     mark,
     src,
@@ -17,9 +17,9 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer}) => {
   };
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={handleMouseEnter}>
+    <article className={`${cardClass} place-card`} onMouseEnter={handleMouseEnter}>
       {mark && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="place-card__image-wrapper cities__image-wrapper">
+      <div className={`${wrapperClass} place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={src} width="260" height="200" alt="Place image"/>
         </a>
@@ -57,4 +57,6 @@ PlaceCard.propTypes = {
   onOfferTitleClick: PropTypes.func.isRequired,
   onOfferMouseEnter: PropTypes.func.isRequired,
   offer: OfferPropTypes,
+  cardClass: PropTypes.string.isRequired,
+  wrapperClass: PropTypes.string.isRequired,
 };

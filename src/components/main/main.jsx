@@ -35,7 +35,13 @@ export const Main = ({offersCount, offers, cities, selectedCity, onCityTitleClic
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            {<OffersList onOfferTitleClick={onOfferTitleClick} offers={offers} />}
+            {<OffersList
+              onOfferTitleClick={onOfferTitleClick}
+              offers={offers}
+              placeClass={`cities__places-list`}
+              cardClass={`cities__place-card`}
+              wrapperClass={`cities__image-wrapper`}
+            />}
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">{<Map selectedCity={selectedCity} offers={offers} />}</section>

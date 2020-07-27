@@ -31,12 +31,10 @@ export class Map extends PureComponent {
     }
   }
 
-  _removeMarkers() { // пока не удаляет прочесть документацию
+  _removeMarkers() {
     while (this.markers.length > 0) {
       this.map.removeLayer(this.markers.pop());
     }
-    // this.markers.forEach((marker) => this.map.removeLayer(marker));
-    // удалять прям слой, сохранять ссылку
   }
 
   _updateMap() {

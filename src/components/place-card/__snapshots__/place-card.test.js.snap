@@ -13,7 +13,7 @@ exports[`Should PlaceCard render correctly 1`] = `
     </span>
   </div>
   <div
-    className="place-card__image-wrapper cities__image-wrapper"
+    className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"

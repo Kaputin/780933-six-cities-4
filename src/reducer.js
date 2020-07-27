@@ -1,9 +1,9 @@
-import {extend, getDefaultCity, getOffersByCities} from "./utils.js";
+import {extend, getDefaultCity, getCityOffers} from "./utils.js";
 import {offers} from "./mocks/offers.js";
 import {cities} from "./mocks/cities.js";
 
 const initialState = {
-  cities,
+  cities, // Изначальный список городов должен быть пустым
   selectedOffers: [],
   selectedCity: null,
 };
@@ -27,7 +27,7 @@ const initialState = {
 
 initialState.selectedCity = getDefaultCity(cities);
 
-initialState.selectedOffers = getOffersByCities(offers, initialState.selectedCity);
+initialState.selectedOffers = getCityOffers(offers, initialState.selectedCity);
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -50,15 +50,15 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       const city = action.payload;
       return extend(state, {
-        selectedOffers: getOffersByCities(offers, city),
+        selectedOffers: getCityOffers(offers, city),
         selectedCity: city,
       });
     case ActionType.LOAD_CITIES:
-      const loadCities = action.payload;
+      const loadedCities = action.payload;
       return extend(state, {
-        cities: loadCities,
-        selectedOffers: getOffersByCities(offers, loadCities[0]),
-        selectedCity: loadCities[0],
+        cities: loadedCities,
+        selectedOffers: getCityOffers(offers, loadedCities[0]),
+        selectedCity: loadedCities[0],
       });
   }
   return state;

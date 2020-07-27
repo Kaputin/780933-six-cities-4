@@ -7,27 +7,6 @@ import {Property} from "../property/property.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-// export const App = (props) => { // потом уберу оставил, чтобы не забыть
-//   const {
-//     loadCities,
-//     cities,
-//     selectedOffers,
-//     selectedCity,
-//     selectedCoordinates,
-//     onCityTitleClick,
-//   } = props;
-
-// componentDidMount() {
-//   this.prop.loadCities();
-// }
-
-// App.defaultProps = { // потом уберу оставил, чтобы не забыть
-//   selectedCity: {
-//     id: 1,
-//     title: `Amsterdam`,
-//     coordinates: [52.38333, 4.9]
-//   }
-// };
 
 export class App extends PureComponent {
   constructor(props) {
@@ -64,7 +43,7 @@ export class App extends PureComponent {
           onOfferTitleClick={this.offerTitleClickHandler} />
       );
     }
-    return <Property offer={this.state.currentOffer} />;
+    return <Property offer={this.state.currentOffer} selectedCity={selectedCity} offers={selectedOffers} onOfferTitleClick={this.offerTitleClickHandler} />;
   }
 
   render() {
@@ -75,7 +54,7 @@ export class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-component">
-            <Property offer={this.props.selectedOffers[0]} />
+            <Property offer={this.props.selectedOffers[0]} selectedCity={this.props.cities[0]} offers={this.props.selectedOffers} onOfferTitleClick={this.offerTitleClickHandler}/>
           </Route>
         </Switch>
       </BrowserRouter>
