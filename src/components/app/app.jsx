@@ -12,15 +12,22 @@ export class App extends PureComponent {
   constructor(props) {
     super(props);
     this.offerTitleClickHandler = this.offerTitleClickHandler.bind(this);
-
+    this.offerMouseEnterHandler = this.offerMouseEnterHandler.bind(this);
     this.state = {
-      currentOffer: null
+      currentOffer: null,
+      selectedOffer: null,
     };
   }
 
   offerTitleClickHandler(offer) {
     this.setState({
       currentOffer: offer
+    });
+  }
+
+  offerMouseEnterHandler(offer) {
+    this.setState({
+      selectedOffer: offer
     });
   }
 
@@ -32,6 +39,8 @@ export class App extends PureComponent {
       onCityTitleClick,
     } = this.props;
 
+    const {selectedOffer} = this.state;
+
     if (!this.state.currentOffer) {
       return (
         <Main
@@ -39,11 +48,13 @@ export class App extends PureComponent {
           offers={selectedOffers}
           cities={cities}
           selectedCity={selectedCity}
+          selectedOffer={selectedOffer}
           onCityTitleClick={onCityTitleClick}
-          onOfferTitleClick={this.offerTitleClickHandler} />
+          onOfferTitleClick={this.offerTitleClickHandler}
+          onOfferMouseEnter={this.offerMouseEnterHandler} />
       );
     }
-    return <Property offer={this.state.currentOffer} selectedCity={selectedCity} offers={selectedOffers} onOfferTitleClick={this.offerTitleClickHandler} />;
+    return <Property offer={this.state.currentOffer} selectedCity={selectedCity} selectedOffer={selectedOffer} offers={selectedOffers} onOfferTitleClick={this.offerTitleClickHandler} onOfferMouseEnter={this.offerMouseEnterHandler} />;
   }
 
   render() {
@@ -54,7 +65,7 @@ export class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-component">
-            <Property offer={this.props.selectedOffers[0]} selectedCity={this.props.cities[0]} offers={this.props.selectedOffers} onOfferTitleClick={this.offerTitleClickHandler}/>
+            <Property offer={this.props.selectedOffers[0]} selectedCity={this.props.cities[0]} selectedOffer={this.props.selectedOffers[0]} offers={this.props.selectedOffers} onOfferTitleClick={this.offerTitleClickHandler} onOfferMouseEnter={this.offerMouseEnterHandler}/>
           </Route>
         </Switch>
       </BrowserRouter>

@@ -160,8 +160,10 @@ it(`Should Property render correctly`, () => {
     .create(<Property
       offer={offer}
       selectedCity={selectedCity}
+      selectedOffer={offer}
       offers={offers}
       onOfferTitleClick={() => {}}
+      onOfferMouseEnter={() => {}}
     />,
     {
       createNodeMock: () => document.createElement(`div`)

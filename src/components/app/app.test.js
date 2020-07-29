@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
+
+const mockStore = configureStore([]);
 
 const selectedOffers = [
   {
@@ -475,17 +479,41 @@ const cities = [
   }
 ];
 
+// it(`Render App`, () => {
+//   const tree = renderer
+//     .create(<App
+//       cities={cities}
+//       selectedOffers={selectedOffers}
+//       selectedCity={cities[0]}
+//       onCityTitleClick={() => {}}
+//     />,
+//     {
+//       createNodeMock: () => document.createElement(`div`)
+//     })
+//     .toJSON();
+//
+//   expect(tree).toMatchSnapshot();
+// });
+
 it(`Render App`, () => {
+  const store = mockStore({
+    currentOffer: null,
+    selectedOffer: null,
+    selectedSortOptions: `Popular`
+  });
+
   const tree = renderer
-    .create(<App
-      cities={cities}
-      selectedOffers={selectedOffers}
-      selectedCity={cities[0]}
-      onCityTitleClick={() => {}}
-    />,
-    {
-      createNodeMock: () => document.createElement(`div`)
-    })
+    .create(
+        <Provider store={store}>
+          <App
+            cities={cities}
+            selectedOffers={selectedOffers}
+            selectedCity={cities[0]}
+            onCityTitleClick={() => {}}/>,
+        </Provider>,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

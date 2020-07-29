@@ -446,6 +446,7 @@ it(`Should OffersList render correctly`, () => {
   const tree = renderer
     .create(<OffersList
       onOfferTitleClick={() => {}}
+      onOfferMouseEnter={() => {}}
       offers={offers}
       placeClass={`cities__places-list`}
       cardClass={`cities__place-card`}

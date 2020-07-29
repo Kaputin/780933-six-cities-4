@@ -16,6 +16,11 @@ export class Map extends PureComponent {
       iconSize: [27, 39]
     });
 
+    this.activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [27, 39]
+    });
+
   }
 
   componentDidMount() {
@@ -24,7 +29,7 @@ export class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedCity !== prevProps.selectedCity || this.props.offers !== prevProps.offers) {
+    if (this.props.selectedCity !== prevProps.selectedCity || this.props.offers !== prevProps.offers || this.props.selectedOffer !== prevProps.selectedOffer) {
       this._updateMap();
       this._removeMarkers();
       this._createMarkers();
@@ -61,19 +66,28 @@ export class Map extends PureComponent {
   }
 
   _createMarkers() {
-    const {offers} = this.props;
+    const {offers, selectedOffer} = this.props;
     this.markers = [];
 
     offers.forEach((offer) => {
       const offerCords = offer.coordinates;
       if (offerCords.length) {
         const marker = leaflet
-        .marker(offerCords, this.icon)
+        .marker(offerCords, {icon: this.icon})
         .addTo(this.map);
 
         this.markers.push(marker);
       }
     });
+
+    if (selectedOffer) {
+      const offerCords = selectedOffer.coordinates;
+      const marker = leaflet
+        .marker(offerCords, {icon: this.activeIcon})
+        .addTo(this.map);
+
+      this.markers.push(marker);
+    }
   }
 
   render() {
@@ -86,4 +100,5 @@ export class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   selectedCity: CityPropTypes,
+  selectedOffer: PropTypes.oneOfType([OfferPropTypes, PropTypes.object.isRequired]),
 };

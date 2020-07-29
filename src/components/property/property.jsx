@@ -5,7 +5,7 @@ import {Map} from "../map/map.jsx";
 import {OffersList} from "../offers-list/offers-list.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 
-export const Property = ({offer, selectedCity, offers, onOfferTitleClick}) => {
+export const Property = ({offer, selectedCity, selectedOffer, offers, onOfferTitleClick, onOfferMouseEnter}) => {
   const {
     bedrooms,
     adults,
@@ -162,13 +162,14 @@ export const Property = ({offer, selectedCity, offers, onOfferTitleClick}) => {
             </section>
           </div>
         </div>
-        <section className="property__map map">{<Map selectedCity={selectedCity} offers={offers.slice(0, 3)} />}</section>
+        <section className="property__map map">{<Map selectedCity={selectedCity} offers={offers.slice(0, 3)} selectedOffer={selectedOffer} />}</section>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           {<OffersList
             onOfferTitleClick={onOfferTitleClick}
+            onOfferMouseEnter={onOfferMouseEnter}
             offers={offers.slice(0, 3)}
             placeClass={`near-places__list`}
             cardClass={`near-places__card`}
@@ -185,4 +186,6 @@ Property.propTypes = {
   selectedCity: CityPropTypes,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
+  onOfferMouseEnter: PropTypes.func.isRequired,
+  selectedOffer: PropTypes.oneOfType([OfferPropTypes, PropTypes.object.isRequired]),
 };

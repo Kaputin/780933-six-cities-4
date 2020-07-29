@@ -12,12 +12,8 @@ export const PlaceCard = ({onOfferTitleClick, onOfferMouseEnter, offer, cardClas
     type
   } = offer;
 
-  const handleMouseEnter = (selectedOffer) => {
-    onOfferMouseEnter(selectedOffer);
-  };
-
   return (
-    <article className={`${cardClass} place-card`} onMouseEnter={handleMouseEnter}>
+    <article className={`${cardClass} place-card`} onMouseEnter={() => onOfferMouseEnter(offer)} onMouseLeave={() => onOfferMouseEnter(null)} >
       {mark && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${wrapperClass} place-card__image-wrapper`}>
         <a href="#">
