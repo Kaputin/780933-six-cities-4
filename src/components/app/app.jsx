@@ -7,35 +7,13 @@ import {Property} from "../property/property.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-// export const App = (props) => { // потом уберу оставил, чтобы не забыть
-//   const {
-//     loadCities,
-//     cities,
-//     selectedOffers,
-//     selectedCity,
-//     selectedCoordinates,
-//     onCityTitleClick,
-//   } = props;
-
-// componentDidMount() {
-//   this.prop.loadCities();
-// }
-
-// App.defaultProps = { // потом уберу оставил, чтобы не забыть
-//   selectedCity: {
-//     id: 1,
-//     title: `Amsterdam`,
-//     coordinates: [52.38333, 4.9]
-//   }
-// };
 
 export class App extends PureComponent {
   constructor(props) {
     super(props);
     this.offerTitleClickHandler = this.offerTitleClickHandler.bind(this);
-
     this.state = {
-      currentOffer: null
+      currentOffer: null,
     };
   }
 
@@ -48,7 +26,7 @@ export class App extends PureComponent {
   _renderApp() {
     const {
       cities,
-      selectedOffers,
+      selectedCityOffers,
       selectedCity,
       onCityTitleClick,
     } = this.props;
@@ -56,15 +34,23 @@ export class App extends PureComponent {
     if (!this.state.currentOffer) {
       return (
         <Main
-          offersCount={selectedOffers.length}
-          offers={selectedOffers}
+          offersCount={selectedCityOffers.length}
+          offers={selectedCityOffers}
           cities={cities}
           selectedCity={selectedCity}
           onCityTitleClick={onCityTitleClick}
-          onOfferTitleClick={this.offerTitleClickHandler} />
+          onOfferTitleClick={this.offerTitleClickHandler}
+        />
       );
     }
-    return <Property offer={this.state.currentOffer} />;
+    return (
+      <Property
+        offer={this.state.currentOffer}
+        selectedCity={selectedCity}
+        offers={selectedCityOffers}
+        onOfferTitleClick={this.offerTitleClickHandler}
+      />
+    );
   }
 
   render() {
@@ -75,7 +61,12 @@ export class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-component">
-            <Property offer={this.props.selectedOffers[0]} />
+            <Property
+              offer={this.props.selectedCityOffers[0]}
+              selectedCity={this.props.cities[0]}
+              offers={this.props.selectedCityOffers}
+              onOfferTitleClick={this.offerTitleClickHandler}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -85,14 +76,14 @@ export class App extends PureComponent {
 
 App.propTypes = {
   cities: PropTypes.arrayOf(CityPropTypes).isRequired,
-  selectedOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  selectedCity: CityPropTypes,
+  selectedCityOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  selectedCity: CityPropTypes.isRequired,
   onCityTitleClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   cities: state.cities,
-  selectedOffers: state.selectedOffers,
+  selectedCityOffers: state.selectedCityOffers,
   selectedCity: state.selectedCity,
 });
 

@@ -1,37 +1,27 @@
-import {extend, getDefaultCity, getOffersByCities} from "./utils.js";
+import {extend, getDefaultCity, getCityOffers, getSortOffers} from "./utils.js";
 import {offers} from "./mocks/offers.js";
 import {cities} from "./mocks/cities.js";
+import {sortingOptions} from "./const.js";
 
 const initialState = {
-  cities,
-  selectedOffers: [],
+  cities, // Изначальный список городов должен быть пустым
+  selectedCityOffers: [],
   selectedCity: null,
+  selectedSortingOptions: sortingOptions[0],
+  hoveredOffer: null,
 };
-//
-// const initialState = { // потом уберу оставил, чтобы не забыть
-//   cities: [],
-//   selectedCityOffers: [],
-//   selectedCity: {
-//     id: 1,
-//     title: `Amsterdam`,
-//     coordinates: [52.38333, 4.9]
-//   }
-// };
-
-// const initialState = {
-//   cities: [],
-//   selectedCityOffers: [],
-//   selectedCity: ``,
-//   coordinates: [],
-// };
 
 initialState.selectedCity = getDefaultCity(cities);
 
-initialState.selectedOffers = getOffersByCities(offers, initialState.selectedCity);
+initialState.selectedCityOffers = getCityOffers(offers, initialState.selectedCity);
+
+const DEFAULT_CITY_OFFERS = initialState.selectedCityOffers;
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_CITIES: `LOAD_CITIES`,
+  CHANGE_SORT_OPTION: `CHANGE_SORT_OPTION`,
+  CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
 };
 
 export const ActionCreator = {
@@ -43,6 +33,14 @@ export const ActionCreator = {
     type: ActionType.LOAD_CITIES,
     payload: cities,
   }),
+  changeSortOption: (selectedSortingOptions) => ({
+    type: ActionType.CHANGE_SORT_OPTION,
+    payload: selectedSortingOptions,
+  }),
+  changeHoveredOffer: (hoveredOffer) => ({
+    type: ActionType.CHANGE_HOVERED_OFFER,
+    payload: hoveredOffer,
+  }),
 };
 
 export const reducer = (state = initialState, action) => {
@@ -50,15 +48,27 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       const city = action.payload;
       return extend(state, {
-        selectedOffers: getOffersByCities(offers, city),
+        selectedCityOffers: getCityOffers(offers, city),
         selectedCity: city,
+        selectedSortingOptions: sortingOptions[0],
       });
     case ActionType.LOAD_CITIES:
-      const loadCities = action.payload;
+      const loadedCities = action.payload;
       return extend(state, {
-        cities: loadCities,
-        selectedOffers: getOffersByCities(offers, loadCities[0]),
-        selectedCity: loadCities[0],
+        cities: loadedCities,
+        selectedCityOffers: getCityOffers(offers, loadedCities[0]),
+        selectedCity: loadedCities[0],
+      });
+    case ActionType.CHANGE_SORT_OPTION:
+      const selectedOptions = action.payload;
+      return extend(state, {
+        selectedSortingOptions: selectedOptions,
+        selectedCityOffers: getSortOffers(state.selectedCityOffers, selectedOptions, DEFAULT_CITY_OFFERS),
+      });
+    case ActionType.CHANGE_HOVERED_OFFER:
+      const selectedOffer = action.payload;
+      return extend(state, {
+        hoveredOffer: selectedOffer,
       });
   }
   return state;

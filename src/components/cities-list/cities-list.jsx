@@ -12,8 +12,9 @@ export const CitiesList = ({cities, selectedCity, onCityTitleClick}) => {
             <span
               onClick={() => {
                 onCityTitleClick(city);
-              }}
-            >{city.title}</span>
+              }}>
+              {city.title}
+            </span>
           </a>
         </li>
       ))}
@@ -23,6 +24,6 @@ export const CitiesList = ({cities, selectedCity, onCityTitleClick}) => {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(CityPropTypes).isRequired,
-  selectedCity: CityPropTypes,
+  selectedCity: CityPropTypes.isRequired,
   onCityTitleClick: PropTypes.func.isRequired,
 };

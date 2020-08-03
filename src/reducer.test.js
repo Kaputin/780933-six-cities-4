@@ -33,7 +33,7 @@ const cities = [
   }
 ];
 
-const offersFirstCity = [
+const firstCityOffers = [
   {
     id: 1,
     bedrooms: 3,
@@ -47,7 +47,31 @@ const offersFirstCity = [
     src: `img/apartment-01.jpg`,
     stars: {width: `80%`},
     title: `Beautiful & luxurious apartment at great location`,
-    coordinates: [52.3909553943508, 4.85309666406198]
+    coordinates: [52.3909553943508, 4.85309666406198],
+    reviews: [{
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 1,
+      commentRating: `80%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Max`
+      }
+    },
+    {
+      comment: `123.`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 2,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: true,
+        name: `Ann`
+      }
+    }]
   }, {
     id: 2,
     bedrooms: 2,
@@ -61,7 +85,19 @@ const offersFirstCity = [
     src: `img/room.jpg`,
     stars: {width: `80%`},
     title: `Wood and stone place`,
-    coordinates: [52.369553943508, 4.85309666406198]
+    coordinates: [52.369553943508, 4.85309666406198],
+    reviews: [{
+      comment: `AAAAAAAAAAAAAAAAAAAAAAAAAA`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 3,
+      commentRating: `80%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Lisa`
+      }
+    }]
   }, {
     id: 3,
     bedrooms: 5,
@@ -75,7 +111,31 @@ const offersFirstCity = [
     src: `img/apartment-02.jpg`,
     stars: {width: `80%`},
     title: `Canal View Prinsengracht`,
-    coordinates: [52.3909553943508, 4.929309666406198]
+    coordinates: [52.3909553943508, 4.929309666406198],
+    reviews: [{
+      comment: `Cool`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 4,
+      commentRating: `80%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Tom`
+      }
+    },
+    {
+      comment: `Nice`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 5,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Ilon`
+      }
+    }]
   }, {
     id: 4,
     bedrooms: 1,
@@ -89,11 +149,23 @@ const offersFirstCity = [
     src: `img/apartment-03.jpg`,
     stars: {width: `100%`},
     title: `Nice, cozy, warm big bed apartment`,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3809553943508, 4.939309666406198],
+    reviews: [{
+      comment: `Bad`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 6,
+      commentRating: `20%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Petr`
+      }
+    }]
   }
 ];
 
-const offersSecondCity = [
+const secondCityOffers = [
   {
     id: 5,
     bedrooms: 3,
@@ -107,7 +179,19 @@ const offersSecondCity = [
     src: `img/apartment-03.jpg`,
     stars: {width: `100%`},
     title: `Nice, cozy, warm big bed apartment`,
-    coordinates: [48.8534090000000, 2.3488010000000]
+    coordinates: [48.8534090000000, 2.3488010000000],
+    reviews: [{
+      comment: `Nice`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 5,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Ilon`
+      }
+    }]
   }, {
     id: 6,
     bedrooms: 3,
@@ -121,7 +205,19 @@ const offersSecondCity = [
     src: `img/room.jpg`,
     stars: {width: `80%`},
     title: `Wood and stone place`,
-    coordinates: [48.853599, 2.348900]
+    coordinates: [48.853599, 2.348900],
+    reviews: [{
+      comment: `Bad`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 6,
+      commentRating: `20%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Petr`
+      }
+    }]
   }, {
     id: 7,
     bedrooms: 1,
@@ -135,29 +231,174 @@ const offersSecondCity = [
     src: `img/apartment-03.jpg`,
     stars: {width: `100%`},
     title: `Nice, cozy, warm big bed apartment`,
-    coordinates: [48.85359666, 2.348200]
+    coordinates: [48.85359666, 2.348200],
+    reviews: [{
+      comment: `Cool`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 4,
+      commentRating: `80%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Tom`
+      }
+    },
+    {
+      comment: `Nice`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 5,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Ilon`
+      }
+    }]
   }
 ];
+
+const sortedSecondCityOffers = [
+  {
+    id: 6,
+    bedrooms: 3,
+    adults: 6,
+    goods: [`Heating`, `Kitchen`, `Cable TV`],
+    rating: 4.7,
+    city: `Paris`,
+    type: `Private room`,
+    mark: false,
+    price: 80,
+    src: `img/room.jpg`,
+    stars: {width: `80%`},
+    title: `Wood and stone place`,
+    coordinates: [48.853599, 2.348900],
+    reviews: [{
+      comment: `Bad`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 6,
+      commentRating: `20%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Petr`
+      }
+    }]
+  }, {
+    id: 5,
+    bedrooms: 3,
+    adults: 4,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    rating: 4.9,
+    city: `Paris`,
+    type: `Apartment`,
+    mark: true,
+    price: 180,
+    src: `img/apartment-03.jpg`,
+    stars: {width: `100%`},
+    title: `Nice, cozy, warm big bed apartment`,
+    coordinates: [48.8534090000000, 2.3488010000000],
+    reviews: [{
+      comment: `Nice`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 5,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Ilon`
+      }
+    }]
+  }, {
+    id: 7,
+    bedrooms: 1,
+    adults: 2,
+    goods: [`Heating`, `Kitchen`, `Coffee machine`, `Dishwasher`],
+    rating: 5.0,
+    city: `Paris`,
+    type: `Apartment`,
+    mark: true,
+    price: 180,
+    src: `img/apartment-03.jpg`,
+    stars: {width: `100%`},
+    title: `Nice, cozy, warm big bed apartment`,
+    coordinates: [48.85359666, 2.348200],
+    reviews: [{
+      comment: `Cool`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 4,
+      commentRating: `80%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Tom`
+      }
+    },
+    {
+      comment: `Nice`,
+      date: `2019-05-08T14:13:56.569Z`,
+      commentId: 5,
+      commentRating: `100%`,
+      user: {
+        avatar: `img/avatar-max.jpg`,
+        userId: 4,
+        pro: false,
+        name: `Ilon`
+      }
+    }]
+  }
+];
+
+const sortingOptions = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     cities,
-    selectedOffers: offersFirstCity,
+    selectedCityOffers: firstCityOffers,
     selectedCity: cities[0],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   });
 });
 
 it(`Reducer must return another selectedCity & offers`, () => {
   expect(reducer({
     cities,
-    selectedOffers: [],
+    selectedCityOffers: [],
     selectedCity: null,
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   }, {
     type: ActionType.CHANGE_CITY,
     payload: cities[1],
   })).toEqual({
     cities,
-    selectedOffers: offersSecondCity,
+    selectedCityOffers: secondCityOffers,
     selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
+  });
+});
+
+it(`Reducer must return sorted offers`, () => {
+  expect(reducer({
+    cities,
+    selectedCityOffers: secondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
+  }, {
+    type: ActionType.CHANGE_SORT_OPTION,
+    payload: sortingOptions[1],
+  })).toEqual({
+    cities,
+    selectedCityOffers: sortedSecondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[1],
+    hoveredOffer: null,
   });
 });
