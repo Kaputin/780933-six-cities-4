@@ -9,16 +9,16 @@ const mockStore = configureStore([]);
 it(`Should SortingOptions render correctly`, () => {
   const store = mockStore({
     currentOffer: null,
-    selectedOffer: null,
-    selectedSortOptions: `Popular`
+    hoveredOffer: null,
+    selectedSortingOptions: `Popular`
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <SortingOptions
-            selectedSortOptions={`Popular`}
-            onSortOptionClick={() => {}}
+            selectedSortingOptions={`Popular`}
+            onSortingOptionClick={() => {}}
           />,
         </Provider>,
         {

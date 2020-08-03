@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {OffersList} from "./offers-list.jsx";
+import {NearOffers} from "./near-offers.jsx";
 
 const mockStore = configureStore([]);
 
@@ -456,7 +456,7 @@ it(`Should OffersList render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <OffersList
+          <NearOffers
             onOfferTitleClick={() => {}}
             offers={offers}
           />

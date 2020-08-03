@@ -1,20 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PlaceCard} from "../place-card/place-card.jsx";
+import PlaceCard from "../place-card/place-card.jsx";
 import {OfferPropTypes} from "../../propTypes.js";
 
-export const OffersList = ({onOfferTitleClick, onOfferMouseEnter, offers, placeClass, cardClass, wrapperClass}) => {
+export const OffersList = ({onOfferTitleClick, offers}) => {
 
   return (
-    <div className={`${placeClass} places__list tabs__content`}>
+    <div className={`cities__places-list places__list tabs__content`}>
       {offers.map((offer) =>
         <PlaceCard
           onOfferTitleClick={onOfferTitleClick}
-          onOfferMouseEnter={onOfferMouseEnter}
           offer={offer}
           key={offer.id}
-          cardClass={cardClass}
-          wrapperClass={wrapperClass}
+          cardClass={`cities__place-card`}
+          wrapperClass={`cities__image-wrapper`}
         />)
       }
     </div>
@@ -25,8 +24,4 @@ export const OffersList = ({onOfferTitleClick, onOfferMouseEnter, offers, placeC
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
-  onOfferMouseEnter: PropTypes.func.isRequired,
-  placeClass: PropTypes.string.isRequired,
-  cardClass: PropTypes.string.isRequired,
-  wrapperClass: PropTypes.string.isRequired
 };

@@ -353,47 +353,52 @@ const sortedSecondCityOffers = [
   }
 ];
 
-const SORT_OPTIONS = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+const sortingOptions = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     cities,
-    selectedOffers: firstCityOffers,
+    selectedCityOffers: firstCityOffers,
     selectedCity: cities[0],
-    selectedSortOptions: SORT_OPTIONS[0],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   });
 });
 
 it(`Reducer must return another selectedCity & offers`, () => {
   expect(reducer({
     cities,
-    selectedOffers: [],
+    selectedCityOffers: [],
     selectedCity: null,
-    selectedSortOptions: SORT_OPTIONS[0],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   }, {
     type: ActionType.CHANGE_CITY,
     payload: cities[1],
   })).toEqual({
     cities,
-    selectedOffers: secondCityOffers,
+    selectedCityOffers: secondCityOffers,
     selectedCity: cities[1],
-    selectedSortOptions: SORT_OPTIONS[0],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   });
 });
 
 it(`Reducer must return sorted offers`, () => {
   expect(reducer({
     cities,
-    selectedOffers: secondCityOffers,
+    selectedCityOffers: secondCityOffers,
     selectedCity: cities[1],
-    selectedSortOptions: SORT_OPTIONS[0],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
   }, {
     type: ActionType.CHANGE_SORT_OPTION,
-    payload: SORT_OPTIONS[1],
+    payload: sortingOptions[1],
   })).toEqual({
     cities,
-    selectedOffers: sortedSecondCityOffers,
+    selectedCityOffers: sortedSecondCityOffers,
     selectedCity: cities[1],
-    selectedSortOptions: SORT_OPTIONS[1],
+    selectedSortingOptions: sortingOptions[1],
+    hoveredOffer: null,
   });
 });

@@ -10,18 +10,18 @@ export const getCityOffers = (offersList, selectedCity) => offersList.filter((of
 // export const getCityCoordinates = (citiesList, selectedCity) => cities.find((city) => city.title === selectedCity.title).coordinates;
 // export const getCityById = (citiesList, id) => cities.find((city) => city.id === id); // потом уберу оставил, чтобы не забыть
 
-export const getSortOffers = (offers, selectedSortOptions) => {
-  const sortOffers = offers.slice(0);
-  switch (selectedSortOptions) {
+export const getSortOffers = (offers, selectedSortingOptions, defaultOffers) => {
+  const sortingOffers = offers.slice(0);
+  switch (selectedSortingOptions) {
     case `Popular`:
-      return sortOffers;
+      return defaultOffers;
     case `Price: low to high`:
-      return sortOffers.sort((a, b) => a.price - b.price);
+      return sortingOffers.sort((a, b) => a.price - b.price);
     case `Price: high to low`:
-      return sortOffers.sort((a, b) => a.price - b.price).reverse();
+      return sortingOffers.sort((a, b) => a.price - b.price).reverse();
     case `Top rated first`:
-      return sortOffers.sort((a, b) => a.rating - b.rating).reverse();
+      return sortingOffers.sort((a, b) => a.rating - b.rating).reverse();
     default:
-      return sortOffers;
+      return sortingOffers;
   }
 };

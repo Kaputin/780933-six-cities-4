@@ -1,26 +1,27 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 
+const offerIcon = leaflet.icon({
+  iconUrl: `img/pin.svg`,
+  iconSize: [27, 39]
+});
+
+const activeOfferIcon = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [27, 39]
+});
+
+const DEFAULT_ZOOM_LEVEL = 12;
 
 export class Map extends PureComponent {
   constructor(props) {
     super(props);
     this.markers = [];
     this.mapRef = React.createRef();
-    this.zoom = 12;
     this.map = null;
-    this.icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [27, 39]
-    });
-
-    this.activeIcon = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
-      iconSize: [27, 39]
-    });
-
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ export class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedCity !== prevProps.selectedCity || this.props.offers !== prevProps.offers || this.props.selectedOffer !== prevProps.selectedOffer) {
+    if (this.props.selectedCity !== prevProps.selectedCity || this.props.offers !== prevProps.offers || this.props.hoveredOffer !== prevProps.hoveredOffer) {
       this._updateMap();
       this._removeMarkers();
       this._createMarkers();
@@ -44,19 +45,19 @@ export class Map extends PureComponent {
 
   _updateMap() {
     const {selectedCity} = this.props;
-    this.map.setView(selectedCity.coordinates, this.zoom);
+    this.map.setView(selectedCity.coordinates, DEFAULT_ZOOM_LEVEL);
   }
 
   _initializeMap() {
     const {selectedCity} = this.props;
     this.map = leaflet.map(this.mapRef.current, {
       center: selectedCity.coordinates,
-      zoom: this.zoom,
+      zoom: DEFAULT_ZOOM_LEVEL,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(selectedCity.coordinates, this.zoom);
+    this.map.setView(selectedCity.coordinates, DEFAULT_ZOOM_LEVEL);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -66,39 +67,45 @@ export class Map extends PureComponent {
   }
 
   _createMarkers() {
-    const {offers, selectedOffer} = this.props;
+    const {offers, hoveredOffer} = this.props;
     this.markers = [];
 
     offers.forEach((offer) => {
       const offerCords = offer.coordinates;
       if (offerCords.length) {
-        const marker = leaflet
-        .marker(offerCords, {icon: this.icon})
-        .addTo(this.map);
+        if (hoveredOffer && offerCords === hoveredOffer.coordinates) {
+          const marker = leaflet
+          .marker(offerCords, {icon: activeOfferIcon})
+          .addTo(this.map);
 
-        this.markers.push(marker);
+          this.markers.push(marker);
+
+        } else {
+          const marker = leaflet
+          .marker(offerCords, {icon: offerIcon})
+          .addTo(this.map);
+
+          this.markers.push(marker);
+        }
       }
     });
-
-    if (selectedOffer) {
-      const offerCords = selectedOffer.coordinates;
-      const marker = leaflet
-        .marker(offerCords, {icon: this.activeIcon})
-        .addTo(this.map);
-
-      this.markers.push(marker);
-    }
   }
 
   render() {
     return (
-      <div id="map" ref={this.mapRef} style={{width: `100%`, height: `100%`}}></div>
+      <div id="map" ref={this.mapRef} style={{width: `100%`, height: `100%`}}/>
     );
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  selectedCity: CityPropTypes,
-  selectedOffer: PropTypes.oneOfType([OfferPropTypes, PropTypes.object.isRequired]),
+  hoveredOffer: OfferPropTypes,
+  selectedCity: CityPropTypes.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  hoveredOffer: state.hoveredOffer,
+});
+
+export default connect(mapStateToProps)(Map);

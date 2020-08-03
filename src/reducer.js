@@ -1,23 +1,27 @@
 import {extend, getDefaultCity, getCityOffers, getSortOffers} from "./utils.js";
 import {offers} from "./mocks/offers.js";
 import {cities} from "./mocks/cities.js";
-import {SORT_OPTIONS} from "./mocks/sorting-options.js";
+import {sortingOptions} from "./const.js";
 
 const initialState = {
   cities, // Изначальный список городов должен быть пустым
-  selectedOffers: [],
+  selectedCityOffers: [],
   selectedCity: null,
-  selectedSortOptions: SORT_OPTIONS[0],
+  selectedSortingOptions: sortingOptions[0],
+  hoveredOffer: null,
 };
 
 initialState.selectedCity = getDefaultCity(cities);
 
-initialState.selectedOffers = getCityOffers(offers, initialState.selectedCity);
+initialState.selectedCityOffers = getCityOffers(offers, initialState.selectedCity);
+
+const DEFAULT_CITY_OFFERS = initialState.selectedCityOffers;
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_CITIES: `LOAD_CITIES`,
   CHANGE_SORT_OPTION: `CHANGE_SORT_OPTION`,
+  CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
 };
 
 export const ActionCreator = {
@@ -29,9 +33,13 @@ export const ActionCreator = {
     type: ActionType.LOAD_CITIES,
     payload: cities,
   }),
-  changeSortOption: (selectedSortOptions) => ({
+  changeSortOption: (selectedSortingOptions) => ({
     type: ActionType.CHANGE_SORT_OPTION,
-    payload: selectedSortOptions,
+    payload: selectedSortingOptions,
+  }),
+  changeHoveredOffer: (hoveredOffer) => ({
+    type: ActionType.CHANGE_HOVERED_OFFER,
+    payload: hoveredOffer,
   }),
 };
 
@@ -40,22 +48,27 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       const city = action.payload;
       return extend(state, {
-        selectedOffers: getCityOffers(offers, city),
+        selectedCityOffers: getCityOffers(offers, city),
         selectedCity: city,
-        selectedSortOptions: SORT_OPTIONS[0],
+        selectedSortingOptions: sortingOptions[0],
       });
     case ActionType.LOAD_CITIES:
       const loadedCities = action.payload;
       return extend(state, {
         cities: loadedCities,
-        selectedOffers: getCityOffers(offers, loadedCities[0]),
+        selectedCityOffers: getCityOffers(offers, loadedCities[0]),
         selectedCity: loadedCities[0],
       });
     case ActionType.CHANGE_SORT_OPTION:
       const selectedOptions = action.payload;
       return extend(state, {
-        selectedSortOptions: selectedOptions,
-        selectedOffers: getSortOffers(state.selectedOffers, selectedOptions),
+        selectedSortingOptions: selectedOptions,
+        selectedCityOffers: getSortOffers(state.selectedCityOffers, selectedOptions, DEFAULT_CITY_OFFERS),
+      });
+    case ActionType.CHANGE_HOVERED_OFFER:
+      const selectedOffer = action.payload;
+      return extend(state, {
+        hoveredOffer: selectedOffer,
       });
   }
   return state;

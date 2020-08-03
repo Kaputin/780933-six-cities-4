@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
-import {SORT_OPTIONS} from "../../mocks/sorting-options.js";
+import {sortingOptions} from "../../const.js";
 
 export class SortingOptions extends PureComponent {
   constructor(props) {
@@ -25,26 +25,26 @@ export class SortingOptions extends PureComponent {
   }
 
   sortOptionClickHandler(option) {
-    this.props.onSortOptionClick(option);
+    this.props.onSortingOptionClick(option);
     this.setState({isOpen: false});
   }
 
   render() {
     const {isOpen} = this.state;
-    const {selectedSortOptions} = this.props;
+    const {selectedSortingOptions} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0" onClick={this.sortOptionsListClickHandler}>
-          {selectedSortOptions}
+          {selectedSortingOptions}
           <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select"></use>
+            <use xlinkHref="#icon-arrow-select"/>
           </svg>
         </span>
         <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
-          {SORT_OPTIONS.map((sortingOption) => (
-            <li key={sortingOption} className={`places__option ${sortingOption === selectedSortOptions ? `places__option--active` : ``}`} tabIndex="0" onClick={() => this.sortOptionClickHandler(sortingOption)}>{sortingOption}</li>
+          {sortingOptions.map((sortingOption) => (
+            <li key={sortingOption} className={`places__option ${sortingOption === selectedSortingOptions ? `places__option--active` : ``}`} tabIndex="0" onClick={() => this.sortOptionClickHandler(sortingOption)}>{sortingOption}</li>
           ))}
         </ul>
       </form>
@@ -53,16 +53,16 @@ export class SortingOptions extends PureComponent {
 }
 
 SortingOptions.propTypes = {
-  selectedSortOptions: PropTypes.string.isRequired,
-  onSortOptionClick: PropTypes.func.isRequired,
+  selectedSortingOptions: PropTypes.string.isRequired,
+  onSortingOptionClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  selectedSortOptions: state.selectedSortOptions,
+  selectedSortingOptions: state.selectedSortingOptions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortOptionClick(sortingOption) {
+  onSortingOptionClick(sortingOption) {
     dispatch(ActionCreator.changeSortOption(sortingOption));
   },
 });

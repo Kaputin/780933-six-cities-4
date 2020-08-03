@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import {Property} from "./property.jsx";
+
+const mockStore = configureStore([]);
 
 const offer = {
   id: 1,
@@ -156,18 +160,25 @@ const selectedCity = {
 };
 
 it(`Should Property render correctly`, () => {
+  const store = mockStore({
+    currentOffer: null,
+    hoveredOffer: null,
+    selectedSortingOptions: `Popular`
+  });
+
   const tree = renderer
-    .create(<Property
-      offer={offer}
-      selectedCity={selectedCity}
-      selectedOffer={offer}
-      offers={offers}
-      onOfferTitleClick={() => {}}
-      onOfferMouseEnter={() => {}}
-    />,
-    {
-      createNodeMock: () => document.createElement(`div`)
-    })
+    .create(
+        <Provider store={store}>
+          <Property
+            offer={offer}
+            selectedCity={selectedCity}
+            offers={offers}
+            onOfferTitleClick={() => {}}
+          />,
+        </Provider>,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

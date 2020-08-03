@@ -482,8 +482,8 @@ const cities = [
 it(`Should Main render correctly`, () => {
   const store = mockStore({
     currentOffer: null,
-    selectedOffer: null,
-    selectedSortOptions: `Popular`
+    hoveredOffer: null,
+    selectedSortingOptions: `Popular`
   });
 
   const tree = renderer
@@ -494,10 +494,8 @@ it(`Should Main render correctly`, () => {
             offers={offers}
             cities={cities}
             selectedCity={cities[0]}
-            selectedOffer={offers[0]}
             onCityTitleClick={() => {}}
             onOfferTitleClick={() => {}}
-            onOfferMouseEnter={() => {}}
           />,
         </Provider>,
         {

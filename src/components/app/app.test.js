@@ -479,27 +479,11 @@ const cities = [
   }
 ];
 
-// it(`Render App`, () => {
-//   const tree = renderer
-//     .create(<App
-//       cities={cities}
-//       selectedOffers={selectedOffers}
-//       selectedCity={cities[0]}
-//       onCityTitleClick={() => {}}
-//     />,
-//     {
-//       createNodeMock: () => document.createElement(`div`)
-//     })
-//     .toJSON();
-//
-//   expect(tree).toMatchSnapshot();
-// });
-
 it(`Render App`, () => {
   const store = mockStore({
     currentOffer: null,
-    selectedOffer: null,
-    selectedSortOptions: `Popular`
+    hoveredOffer: null,
+    selectedSortingOptions: `Popular`
   });
 
   const tree = renderer
@@ -507,7 +491,7 @@ it(`Render App`, () => {
         <Provider store={store}>
           <App
             cities={cities}
-            selectedOffers={selectedOffers}
+            selectedCityOffers={selectedOffers}
             selectedCity={cities[0]}
             onCityTitleClick={() => {}}/>,
         </Provider>,

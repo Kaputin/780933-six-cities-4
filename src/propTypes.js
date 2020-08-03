@@ -26,13 +26,13 @@ export const OfferPropTypes = PropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired).isRequired
-}).isRequired;
+});
 
 export const CityPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-}).isRequired;
+});
 
 export const ReviewPropTypes = PropTypes.shape({
   comment: PropTypes.string.isRequired,
@@ -45,4 +45,4 @@ export const ReviewPropTypes = PropTypes.shape({
     pro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-}).isRequired;
+});
