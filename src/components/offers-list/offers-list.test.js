@@ -457,7 +457,6 @@ it(`Should OffersList render correctly`, () => {
     .create(
         <Provider store={store}>
           <OffersList
-            onOfferTitleClick={() => {}}
             offers={offers}
           />
         </Provider>)

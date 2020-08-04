@@ -495,7 +495,6 @@ it(`Should Main render correctly`, () => {
             cities={cities}
             selectedCity={cities[0]}
             onCityTitleClick={() => {}}
-            onOfferTitleClick={() => {}}
           />,
         </Provider>,
         {

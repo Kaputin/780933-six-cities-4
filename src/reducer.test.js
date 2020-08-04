@@ -362,6 +362,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     selectedCity: cities[0],
     selectedSortingOptions: sortingOptions[0],
     hoveredOffer: null,
+    currentOffer: null,
   });
 });
 
@@ -372,6 +373,7 @@ it(`Reducer must return another selectedCity & offers`, () => {
     selectedCity: null,
     selectedSortingOptions: sortingOptions[0],
     hoveredOffer: null,
+    currentOffer: null,
   }, {
     type: ActionType.CHANGE_CITY,
     payload: cities[1],
@@ -381,6 +383,7 @@ it(`Reducer must return another selectedCity & offers`, () => {
     selectedCity: cities[1],
     selectedSortingOptions: sortingOptions[0],
     hoveredOffer: null,
+    currentOffer: null,
   });
 });
 
@@ -391,6 +394,7 @@ it(`Reducer must return sorted offers`, () => {
     selectedCity: cities[1],
     selectedSortingOptions: sortingOptions[0],
     hoveredOffer: null,
+    currentOffer: null,
   }, {
     type: ActionType.CHANGE_SORT_OPTION,
     payload: sortingOptions[1],
@@ -400,5 +404,48 @@ it(`Reducer must return sorted offers`, () => {
     selectedCity: cities[1],
     selectedSortingOptions: sortingOptions[1],
     hoveredOffer: null,
+    currentOffer: null,
+  });
+});
+
+it(`Reducer must return new hoveredOffer`, () => {
+  expect(reducer({
+    cities,
+    selectedCityOffers: secondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
+    currentOffer: null,
+  }, {
+    type: ActionType.CHANGE_HOVERED_OFFER,
+    payload: secondCityOffers[0],
+  })).toEqual({
+    cities,
+    selectedCityOffers: secondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: secondCityOffers[0],
+    currentOffer: null,
+  });
+});
+
+it(`Reducer must return new currentOffer`, () => {
+  expect(reducer({
+    cities,
+    selectedCityOffers: secondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
+    currentOffer: null,
+  }, {
+    type: ActionType.CHANGE_CURRENT_OFFER,
+    payload: secondCityOffers[0],
+  })).toEqual({
+    cities,
+    selectedCityOffers: secondCityOffers,
+    selectedCity: cities[1],
+    selectedSortingOptions: sortingOptions[0],
+    hoveredOffer: null,
+    currentOffer: secondCityOffers[0],
   });
 });

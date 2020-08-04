@@ -457,7 +457,6 @@ it(`Should OffersList render correctly`, () => {
     .create(
         <Provider store={store}>
           <NearOffers
-            onOfferTitleClick={() => {}}
             offers={offers}
           />
         </Provider>)

@@ -9,18 +9,19 @@ export class PlaceCard extends PureComponent {
     super(props);
 
     this.offerMouseEnterHandler = this.offerMouseEnterHandler.bind(this);
-
-    this.state = {
-      hoveredOffer: null,
-    };
+    this.offerTitleClickHandler = this.offerTitleClickHandler.bind(this);
   }
 
   offerMouseEnterHandler(hoveredOffer) {
-    this.props.onPlaceCardHover(hoveredOffer);
+    this.props.onOfferHover(hoveredOffer);
+  }
+
+  offerTitleClickHandler(currentOffer) {
+    this.props.onOfferTitleClick(currentOffer);
   }
 
   render() {
-    const {onOfferTitleClick, offer, cardClass, wrapperClass} = this.props;
+    const {offer, cardClass, wrapperClass} = this.props;
     const {
       mark,
       src,
@@ -57,7 +58,7 @@ export class PlaceCard extends PureComponent {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name" onClick={() => onOfferTitleClick(offer)}>
+          <h2 className="place-card__name" onClick={() => this.offerTitleClickHandler(offer)}>
             <a href="#">{title}</a>
           </h2>
           <p className="place-card__type">{type}</p>
@@ -68,21 +69,25 @@ export class PlaceCard extends PureComponent {
 }
 
 PlaceCard.propTypes = {
-  onOfferTitleClick: PropTypes.func.isRequired,
   offer: OfferPropTypes.isRequired,
   cardClass: PropTypes.string.isRequired,
   wrapperClass: PropTypes.string.isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func.isRequired,
+  onOfferTitleClick: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = (state) => ({
   hoveredOffer: state.hoveredOffer,
+  currentOffer: state.currentOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlaceCardHover(hoveredOffer) {
+  onOfferHover(hoveredOffer) {
     dispatch(ActionCreator.changeHoveredOffer(hoveredOffer));
+  },
+  onOfferTitleClick(currentOffer) {
+    dispatch(ActionCreator.changeCurrentOffer(currentOffer));
   },
 });
 

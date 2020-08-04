@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 import {OfferPropTypes} from "../../propTypes.js";
 
-export const NearOffers = ({onOfferTitleClick, offers}) => {
+export const NearOffers = ({offers}) => {
 
   return (
     <section className="near-places places">
@@ -11,7 +11,6 @@ export const NearOffers = ({onOfferTitleClick, offers}) => {
       <div className={`near-places__list places__list tabs__content`}>
         {offers.map((offer) =>
           <PlaceCard
-            onOfferTitleClick={onOfferTitleClick}
             offer={offer}
             key={offer.id}
             cardClass={`near-places__card`}
@@ -26,5 +25,4 @@ export const NearOffers = ({onOfferTitleClick, offers}) => {
 
 NearOffers.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
 };

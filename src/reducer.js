@@ -9,6 +9,7 @@ const initialState = {
   selectedCity: null,
   selectedSortingOptions: sortingOptions[0],
   hoveredOffer: null,
+  currentOffer: null,
 };
 
 initialState.selectedCity = getDefaultCity(cities);
@@ -22,6 +23,7 @@ export const ActionType = {
   LOAD_CITIES: `LOAD_CITIES`,
   CHANGE_SORT_OPTION: `CHANGE_SORT_OPTION`,
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
+  CHANGE_CURRENT_OFFER: `CHANGE_CURRENT_OFFER`,
 };
 
 export const ActionCreator = {
@@ -40,6 +42,10 @@ export const ActionCreator = {
   changeHoveredOffer: (hoveredOffer) => ({
     type: ActionType.CHANGE_HOVERED_OFFER,
     payload: hoveredOffer,
+  }),
+  changeCurrentOffer: (currentOffer) => ({
+    type: ActionType.CHANGE_CURRENT_OFFER,
+    payload: currentOffer,
   }),
 };
 
@@ -69,6 +75,11 @@ export const reducer = (state = initialState, action) => {
       const selectedOffer = action.payload;
       return extend(state, {
         hoveredOffer: selectedOffer,
+      });
+    case ActionType.CHANGE_CURRENT_OFFER:
+      const offer = action.payload;
+      return extend(state, {
+        currentOffer: offer,
       });
   }
   return state;

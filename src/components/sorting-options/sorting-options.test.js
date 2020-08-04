@@ -17,8 +17,10 @@ it(`Should SortingOptions render correctly`, () => {
     .create(
         <Provider store={store}>
           <SortingOptions
+            isOpen={false}
             selectedSortingOptions={`Popular`}
-            onSortingOptionClick={() => {}}
+            sortOptionClickHandler={() => {}}
+            sortOptionsListClickHandler={() => {}}
           />,
         </Provider>,
         {

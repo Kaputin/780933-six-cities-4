@@ -9,29 +9,16 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 
 export class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.offerTitleClickHandler = this.offerTitleClickHandler.bind(this);
-    this.state = {
-      currentOffer: null,
-    };
-  }
-
-  offerTitleClickHandler(offer) {
-    this.setState({
-      currentOffer: offer
-    });
-  }
-
   _renderApp() {
     const {
       cities,
       selectedCityOffers,
       selectedCity,
       onCityTitleClick,
+      currentOffer,
     } = this.props;
 
-    if (!this.state.currentOffer) {
+    if (!currentOffer) {
       return (
         <Main
           offersCount={selectedCityOffers.length}
@@ -39,16 +26,14 @@ export class App extends PureComponent {
           cities={cities}
           selectedCity={selectedCity}
           onCityTitleClick={onCityTitleClick}
-          onOfferTitleClick={this.offerTitleClickHandler}
         />
       );
     }
     return (
       <Property
-        offer={this.state.currentOffer}
+        offer={currentOffer}
         selectedCity={selectedCity}
         offers={selectedCityOffers}
-        onOfferTitleClick={this.offerTitleClickHandler}
       />
     );
   }
@@ -65,7 +50,6 @@ export class App extends PureComponent {
               offer={this.props.selectedCityOffers[0]}
               selectedCity={this.props.cities[0]}
               offers={this.props.selectedCityOffers}
-              onOfferTitleClick={this.offerTitleClickHandler}
             />
           </Route>
         </Switch>
@@ -79,12 +63,14 @@ App.propTypes = {
   selectedCityOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   selectedCity: CityPropTypes.isRequired,
   onCityTitleClick: PropTypes.func.isRequired,
+  currentOffer: OfferPropTypes,
 };
 
 const mapStateToProps = (state) => ({
   cities: state.cities,
   selectedCityOffers: state.selectedCityOffers,
   selectedCity: state.selectedCity,
+  currentOffer: state.currentOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

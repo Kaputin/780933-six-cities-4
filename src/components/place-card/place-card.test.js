@@ -45,8 +45,8 @@ const offer = {
 it(`Should PlaceCard render correctly`, () => {
   const tree = renderer
     .create(<PlaceCard
+      onOfferHover={() => {}}
       onOfferTitleClick={() => {}}
-      onPlaceCardHover={() => {}}
       offer={offer}
       key={offer.id}
       cardClass={`cities__place-card`}
