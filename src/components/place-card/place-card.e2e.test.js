@@ -48,7 +48,7 @@ const offer = {
 };
 
 const onOfferTitleClick = jest.fn();
-const onPlaceCardHover = jest.fn();
+const onOfferHover = jest.fn();
 
 describe(`PlaceCard e2e tests`, () => {
   it(`Should OfferTitle be pressed`, () => {
@@ -56,7 +56,7 @@ describe(`PlaceCard e2e tests`, () => {
     const placeCard = shallow(
         <PlaceCard
           onOfferTitleClick={onOfferTitleClick}
-          onPlaceCardHover={onPlaceCardHover}
+          onOfferHover={onOfferHover}
           offer={offer}
           key={offer.id}
           cardClass={`cities__place-card`}
@@ -78,7 +78,7 @@ describe(`Offer select e2e`, () => {
     const placeCard = shallow(
         <PlaceCard
           onOfferTitleClick={onOfferTitleClick}
-          onPlaceCardHover={onPlaceCardHover}
+          onOfferHover={onOfferHover}
           offer={offer}
           key={offer.id}
           cardClass={`cities__place-card`}
@@ -90,6 +90,6 @@ describe(`Offer select e2e`, () => {
 
     placeCardComponent.simulate(`mouseenter`);
 
-    expect(onPlaceCardHover).toHaveBeenCalled();
+    expect(onOfferHover).toHaveBeenCalled();
   });
 });

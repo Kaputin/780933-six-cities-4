@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OffersList} from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
-import SortingOptions from "../sorting-options/sorting-options.jsx";
+import {SortingOptions} from "../sorting-options/sorting-options.jsx";
 import {CitiesList} from "../cities-list/cities-list.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
+import {withSorting} from "../../hocs/with-sorting/with-sorting.js";
 
-export const Main = ({offersCount, offers, cities, selectedCity, onCityTitleClick, onOfferTitleClick}) => {
+const SortingOptionsWrapped = withSorting(SortingOptions);
+
+export const Main = ({offersCount, offers, cities, selectedCity, onCityTitleClick}) => {
 
   return (
     <main className="page__main page__main--index">
@@ -25,9 +28,8 @@ export const Main = ({offersCount, offers, cities, selectedCity, onCityTitleClic
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offersCount} places to stay in {selectedCity.title}</b>
-            {<SortingOptions />}
+            {<SortingOptionsWrapped />}
             <OffersList
-              onOfferTitleClick={onOfferTitleClick}
               offers={offers}
             />
           </section>
@@ -50,6 +52,5 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   cities: PropTypes.arrayOf(CityPropTypes).isRequired,
   selectedCity: CityPropTypes.isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
   onCityTitleClick: PropTypes.func.isRequired,
 };

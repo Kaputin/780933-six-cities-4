@@ -8,15 +8,18 @@ Enzyme.configure({
 });
 
 
-const onSortingOptionClick = jest.fn();
+const sortOptionClickHandler = jest.fn();
+const sortOptionsListClickHandler = jest.fn();
 
 describe(`SortingOptions e2e tests`, () => {
   it(`Should SortingOptions be pressed`, () => {
 
     const sortingOptions = shallow(
         <SortingOptions
+          isOpen={false}
           selectedSortingOptions={`Popular`}
-          onSortingOptionClick={onSortingOptionClick}
+          sortOptionClickHandler={sortOptionClickHandler}
+          sortOptionsListClickHandler={sortOptionsListClickHandler}
         />
     );
 
@@ -24,6 +27,26 @@ describe(`SortingOptions e2e tests`, () => {
 
     sortTitle.first().simulate(`click`);
 
-    expect(onSortingOptionClick).toHaveBeenCalled();
+    expect(sortOptionClickHandler).toHaveBeenCalled();
+  });
+});
+
+describe(`SortingOptions e2e tests`, () => {
+  it(`Should SortingListOptions be pressed`, () => {
+
+    const sortingOptions = shallow(
+        <SortingOptions
+          isOpen={false}
+          selectedSortingOptions={`Popular`}
+          sortOptionClickHandler={sortOptionClickHandler}
+          sortOptionsListClickHandler={sortOptionsListClickHandler}
+        />
+    );
+
+    const sortTitle = sortingOptions.find(`.places__sorting-type`);
+
+    sortTitle.first().simulate(`click`);
+
+    expect(sortOptionsListClickHandler).toHaveBeenCalled();
   });
 });

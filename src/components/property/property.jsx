@@ -5,7 +5,7 @@ import Map from "../map/map.jsx";
 import {NearOffers} from "../near-offers/near-offers.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 
-export const Property = ({offer, selectedCity, offers, onOfferTitleClick}) => {
+export const Property = ({offer, selectedCity, offers}) => {
   const {
     bedrooms,
     adults,
@@ -166,7 +166,6 @@ export const Property = ({offer, selectedCity, offers, onOfferTitleClick}) => {
       </section>
       <div className="container">
         <NearOffers
-          onOfferTitleClick={onOfferTitleClick}
           offers={offers.slice(0, 3)}
         />
       </div>
@@ -178,5 +177,4 @@ Property.propTypes = {
   offer: OfferPropTypes.isRequired,
   selectedCity: CityPropTypes.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
 };

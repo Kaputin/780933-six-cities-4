@@ -173,7 +173,6 @@ it(`Should Property render correctly`, () => {
             offer={offer}
             selectedCity={selectedCity}
             offers={offers}
-            onOfferTitleClick={() => {}}
           />,
         </Provider>,
         {
