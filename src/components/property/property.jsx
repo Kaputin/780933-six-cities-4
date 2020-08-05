@@ -174,7 +174,7 @@ export const Property = ({offer, selectedCity, offers}) => {
 };
 
 Property.propTypes = {
-  offer: OfferPropTypes.isRequired,
+  offer: OfferPropTypes,
   selectedCity: CityPropTypes.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
 };

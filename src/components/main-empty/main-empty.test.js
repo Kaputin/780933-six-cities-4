@@ -2,11 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {CitiesList} from "./cities-list.jsx";
+import {MainEmpty} from "./main-empty.jsx";
 
 const mockStore = configureStore([]);
 
-const citiesTest = [
+
+const cities = [
   {
     id: 1,
     title: `Amsterdam`,
@@ -39,37 +40,23 @@ const citiesTest = [
   }
 ];
 
-// it(`Should OffersList render correctly`, () => {
-//   const tree = renderer
-//     .create(
-//       <CitiesList
-//         cities={cities}
-//         selectedCity={selectedCity}
-//         onCityTitleClick={() => {}}
-//       />)
-//     .toJSON();
-//
-//   expect(tree).toMatchSnapshot();
-// });
-
-it(`Should CitysList render correctly`, () => {
+it(`Should Main render correctly`, () => {
   const store = mockStore({
     currentOffer: null,
     hoveredOffer: null,
-    selectedSortingOptions: `Popular`,
-    cities: citiesTest,
-    selectedCity: citiesTest[0],
+    selectedSortingOptions: `Popular`
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <CitiesList
-            cities={citiesTest}
-            selectedCity={citiesTest[0]}
-            onCityTitleClick={() => {}}
-          />
-        </Provider>)
+          <MainEmpty
+            selectedCity={cities[0]}
+          />,
+        </Provider>,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

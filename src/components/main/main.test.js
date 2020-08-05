@@ -446,7 +446,7 @@ const offers = [
   }
 ];
 
-const cities = [
+const citiesTest = [
   {
     id: 1,
     title: `Amsterdam`,
@@ -483,18 +483,18 @@ it(`Should Main render correctly`, () => {
   const store = mockStore({
     currentOffer: null,
     hoveredOffer: null,
-    selectedSortingOptions: `Popular`
+    selectedSortingOptions: `Popular`,
+    cities: citiesTest,
+    selectedCity: citiesTest[0],
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <Main
-            offersCount={offers.length}
             offers={offers}
-            cities={cities}
-            selectedCity={cities[0]}
-            onCityTitleClick={() => {}}
+            cities={citiesTest}
+            selectedCity={citiesTest[0]}
           />,
         </Provider>,
         {

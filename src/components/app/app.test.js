@@ -446,7 +446,7 @@ const selectedOffers = [
   }
 ];
 
-const cities = [
+const citiesTest = [
   {
     id: 1,
     title: `Amsterdam`,
@@ -483,17 +483,18 @@ it(`Render App`, () => {
   const store = mockStore({
     currentOffer: null,
     hoveredOffer: null,
-    selectedSortingOptions: `Popular`
+    selectedSortingOptions: `Popular`,
+    cities: citiesTest,
+    selectedCity: citiesTest[0],
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
-            cities={cities}
+            cities={citiesTest}
             selectedCityOffers={selectedOffers}
-            selectedCity={cities[0]}
-            onCityTitleClick={() => {}}/>,
+            selectedCity={citiesTest[0]}/>,
         </Provider>,
         {
           createNodeMock: () => document.createElement(`div`)

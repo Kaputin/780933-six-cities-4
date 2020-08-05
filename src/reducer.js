@@ -4,7 +4,7 @@ import {cities} from "./mocks/cities.js";
 import {sortingOptions} from "./const.js";
 
 const initialState = {
-  cities, // Изначальный список городов должен быть пустым
+  cities,
   selectedCityOffers: [],
   selectedCity: null,
   selectedSortingOptions: sortingOptions[0],
