@@ -7,8 +7,6 @@ export const getDefaultCity = (citiesList) => {
 };
 
 export const getCityOffers = (offersList, selectedCity) => offersList.filter((offer) => offer.city === selectedCity.title);
-// export const getCityCoordinates = (citiesList, selectedCity) => cities.find((city) => city.title === selectedCity.title).coordinates;
-// export const getCityById = (citiesList, id) => cities.find((city) => city.id === id); // потом уберу оставил, чтобы не забыть
 
 export const getSortOffers = (offers, selectedSortingOptions, defaultOffers) => {
   const sortingOffers = offers.slice(0);

@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
 import {Main} from "../main/main.jsx";
 import {Property} from "../property/property.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
@@ -68,14 +67,5 @@ const mapStateToProps = (state) => ({
   selectedCity: state.selectedCity,
   currentOffer: state.currentOffer,
 });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onCityTitleClick(city) {
-//     dispatch(ActionCreator.changeCity(city));
-//   },
-//   loadCities() {
-//     dispatch(ActionCreator.loadCities());
-//   },
-// });
 
 export default connect(mapStateToProps)(App);
