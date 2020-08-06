@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should OffersList render correctly 1`] = `
+exports[`Should CitysList render correctly 1`] = `
 <ul
   className="locations__list tabs__list"
 >

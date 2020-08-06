@@ -3,7 +3,7 @@
 exports[`Render App 1`] = `
 Array [
   <main
-    className="page__main page__main--index"
+    className="page__main page__main--index "
   >
     <h1
       className="visually-hidden"
