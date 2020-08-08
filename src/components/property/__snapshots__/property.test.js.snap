@@ -20,15 +20,6 @@ Array [
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/room.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
               src="img/apartment-01.jpg"
             />
           </div>
@@ -41,33 +32,6 @@ Array [
               src="img/apartment-02.jpg"
             />
           </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-03.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/studio-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-01.jpg"
-            />
-          </div>
         </div>
       </div>
       <div
@@ -76,13 +40,6 @@ Array [
         <div
           className="property__wrapper"
         >
-          <div
-            className="property__mark"
-          >
-            <span>
-              Premium
-            </span>
-          </div>
           <div
             className="property__name-wrapper"
           >
@@ -133,7 +90,7 @@ Array [
             <span
               className="property__rating-value rating__value"
             >
-              4.8
+              4
             </span>
           </div>
           <ul
@@ -154,7 +111,7 @@ Array [
               className="property__feature property__feature--adults"
             >
               Max 
-              4
+              5
                adults
             </li>
           </ul>
@@ -234,14 +191,14 @@ Array [
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="img/avatar-max.jpg"
                   width="74"
                 />
               </div>
               <span
                 className="property__user-name"
               >
-                Angelina
+                Max
               </span>
             </div>
             <div
@@ -250,12 +207,7 @@ Array [
               <p
                 className="property__text"
               >
-                A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-              </p>
-              <p
-                className="property__text"
-              >
-                An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                123
               </p>
             </div>
           </div>
@@ -277,7 +229,7 @@ Array [
             >
               <li
                 className="reviews__item"
-                id={1}
+                id={6}
               >
                 <div
                   className="reviews__user user"
@@ -297,7 +249,7 @@ Array [
                     className="reviews__user-name"
                     id={4}
                   >
-                    Max
+                    Ilon
                   </span>
                 </div>
                 <div
@@ -326,19 +278,19 @@ Array [
                   <p
                     className="reviews__text"
                   >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
+                    12345
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="2019-04-24"
+                    dateTime="019-05-08T14:13:56.569Z"
                   >
-                    2019-05-08T14:13:56.569Z
+                    Invalid Date
                   </time>
                 </div>
               </li>
               <li
                 className="reviews__item"
-                id={2}
+                id={5}
               >
                 <div
                   className="reviews__user user"
@@ -358,12 +310,7 @@ Array [
                     className="reviews__user-name"
                     id={4}
                   >
-                    Ann
-                  </span>
-                  <span
-                    className="property__user-status"
-                  >
-                    Pro
+                    Ilon
                   </span>
                 </div>
                 <div
@@ -378,7 +325,7 @@ Array [
                       <span
                         style={
                           Object {
-                            "width": "100%",
+                            "width": "80%",
                           }
                         }
                       />
@@ -392,13 +339,13 @@ Array [
                   <p
                     className="reviews__text"
                   >
-                    123.
+                    123
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="2019-04-24"
+                    dateTime="019-05-08T14:13:56.569Z"
                   >
-                    2019-05-08T14:13:56.569Z
+                    Invalid Date
                   </time>
                 </div>
               </li>
@@ -600,13 +547,6 @@ Array [
             onMouseLeave={[Function]}
           >
             <div
-              className="place-card__mark"
-            >
-              <span>
-                Premium
-              </span>
-            </div>
-            <div
               className="near-places__image-wrapper place-card__image-wrapper"
             >
               <a
@@ -714,7 +654,7 @@ Array [
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/room.jpg"
+                  src="img/apartment-01.jpg"
                   width="260"
                 />
               </a>
@@ -732,7 +672,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    80
+                    120
                   </b>
                   <span
                     className="place-card__price-text"
@@ -787,105 +727,7 @@ Array [
                 <a
                   href="#"
                 >
-                  Wood and stone place
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Private room
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-02.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €
-                    132
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      href="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    To bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    style={
-                      Object {
-                        "width": "80%",
-                      }
-                    }
-                  />
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-                onClick={[Function]}
-              >
-                <a
-                  href="#"
-                >
-                  Canal View Prinsengracht
+                  Beautiful & luxurious apartment at great location
                 </a>
               </h2>
               <p

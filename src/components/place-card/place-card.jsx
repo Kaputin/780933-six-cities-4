@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {OfferPropTypes} from "../../propTypes.js";
+import {getHoveredOffer, getCurrentOffer} from "../../reducer/state/selectors.js";
 
 export class PlaceCard extends PureComponent {
   constructor(props) {
@@ -24,9 +26,9 @@ export class PlaceCard extends PureComponent {
     const {offer, cardClass, wrapperClass} = this.props;
     const {
       mark,
-      src,
+      previewImage,
       price,
-      stars,
+      rating,
       title,
       type
     } = offer;
@@ -36,7 +38,7 @@ export class PlaceCard extends PureComponent {
         {mark && <div className="place-card__mark"><span>Premium</span></div>}
         <div className={`${wrapperClass} place-card__image-wrapper`}>
           <a href="#">
-            <img className="place-card__image" src={src} width="260" height="200" alt="Place image"/>
+            <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
           </a>
         </div>
         <div className="place-card__info">
@@ -54,7 +56,7 @@ export class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={stars}/>
+              <span style={{width: rating * 20 + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -78,16 +80,18 @@ PlaceCard.propTypes = {
 
 
 const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer,
-  currentOffer: state.currentOffer,
+  hoveredOffer: getHoveredOffer(state),
+  currentOffer: getCurrentOffer(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferHover(hoveredOffer) {
-    dispatch(ActionCreator.changeHoveredOffer(hoveredOffer));
+    dispatch(StateActionCreator.changeHoveredOffer(hoveredOffer));
   },
   onOfferTitleClick(currentOffer) {
-    dispatch(ActionCreator.changeCurrentOffer(currentOffer));
+    dispatch(StateActionCreator.changeCurrentOffer(currentOffer));
+    dispatch(DataOperation.loadComments(currentOffer.id));
+    dispatch(DataOperation.loadNearOffers(currentOffer.id));
   },
 });
 

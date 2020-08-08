@@ -26,7 +26,7 @@ exports[`Should CitysList render correctly 1`] = `
       <span
         onClick={[Function]}
       >
-        Paris
+        Amsterdam1
       </span>
     </a>
   </li>
@@ -39,7 +39,7 @@ exports[`Should CitysList render correctly 1`] = `
       <span
         onClick={[Function]}
       >
-        Cologne
+        Amsterdam2
       </span>
     </a>
   </li>
@@ -52,7 +52,7 @@ exports[`Should CitysList render correctly 1`] = `
       <span
         onClick={[Function]}
       >
-        Brussels
+        Amsterdam3
       </span>
     </a>
   </li>
@@ -65,7 +65,7 @@ exports[`Should CitysList render correctly 1`] = `
       <span
         onClick={[Function]}
       >
-        Hamburg
+        Amsterdam4
       </span>
     </a>
   </li>
@@ -78,7 +78,7 @@ exports[`Should CitysList render correctly 1`] = `
       <span
         onClick={[Function]}
       >
-        Dusseldorf
+        Amsterdam5
       </span>
     </a>
   </li>

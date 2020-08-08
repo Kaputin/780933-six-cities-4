@@ -6,7 +6,7 @@ exports[`Should ReviewsList render correctly 1`] = `
 >
   <li
     className="reviews__item"
-    id={1}
+    id={6}
   >
     <div
       className="reviews__user user"
@@ -26,7 +26,7 @@ exports[`Should ReviewsList render correctly 1`] = `
         className="reviews__user-name"
         id={4}
       >
-        Max
+        Ilon
       </span>
     </div>
     <div
@@ -55,19 +55,19 @@ exports[`Should ReviewsList render correctly 1`] = `
       <p
         className="reviews__text"
       >
-        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
+        12345
       </p>
       <time
         className="reviews__time"
-        dateTime="2019-04-24"
+        dateTime="019-05-08T14:13:56.569Z"
       >
-        2019-05-08T14:13:56.569Z
+        Invalid Date
       </time>
     </div>
   </li>
   <li
     className="reviews__item"
-    id={2}
+    id={5}
   >
     <div
       className="reviews__user user"
@@ -87,12 +87,7 @@ exports[`Should ReviewsList render correctly 1`] = `
         className="reviews__user-name"
         id={4}
       >
-        Ann
-      </span>
-      <span
-        className="property__user-status"
-      >
-        Pro
+        Ilon
       </span>
     </div>
     <div
@@ -107,7 +102,7 @@ exports[`Should ReviewsList render correctly 1`] = `
           <span
             style={
               Object {
-                "width": "100%",
+                "width": "80%",
               }
             }
           />
@@ -121,13 +116,13 @@ exports[`Should ReviewsList render correctly 1`] = `
       <p
         className="reviews__text"
       >
-        123.
+        123
       </p>
       <time
         className="reviews__time"
-        dateTime="2019-04-24"
+        dateTime="019-05-08T14:13:56.569Z"
       >
-        2019-05-08T14:13:56.569Z
+        Invalid Date
       </time>
     </div>
   </li>

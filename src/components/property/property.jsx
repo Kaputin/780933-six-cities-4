@@ -1,23 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {ReviewsList} from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 import {NearOffers} from "../near-offers/near-offers.jsx";
-import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
+import {OfferPropTypes, CityPropTypes, ReviewPropTypes} from "../../propTypes.js";
+import {getSelectedCity} from "../../reducer/state/selectors.js";
+import {getComments, getNearOffers} from "../../reducer/data/selectors.js";
 
-export const Property = ({offer, selectedCity, offers}) => {
+
+export const Property = ({offer, selectedCity, nearOffers, commentsCurrentOffer}) => {
   const {
     bedrooms,
-    adults,
+    maxAdults,
     goods,
-    stars,
-    type,
-    mark,
-    price,
-    src,
+    description,
     rating,
+    type,
+    isPremium,
+    price,
     title,
-    reviews
+    host,
+    images,
   } = offer;
 
   return (
@@ -25,29 +29,16 @@ export const Property = ({offer, selectedCity, offers}) => {
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/room.jpg" alt="Photo studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src={src} alt="Photo studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Photo studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-            </div>
+            {images.map((image) => (
+              <div className="property__image-wrapper" key={image}>
+                <img className="property__image" src={image} alt="Photo studio"/>
+              </div>
+            ))}
           </div>
         </div>
         <div className="property__container container">
           <div className="property__wrapper">
-            {mark && <div className="property__mark"><span>Premium</span></div>}
+            {isPremium && <div className="property__mark"><span>Premium</span></div>}
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {title}
@@ -61,7 +52,7 @@ export const Property = ({offer, selectedCity, offers}) => {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={stars}/>
+                <span style={{width: rating * 20 + `%`}}/>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">{rating}</span>
@@ -74,7 +65,7 @@ export const Property = ({offer, selectedCity, offers}) => {
                 {bedrooms} Bedrooms
               </li>
               <li className="property__feature property__feature--adults">
-                Max {adults} adults
+                Max {maxAdults} adults
               </li>
             </ul>
             <div className="property__price">
@@ -95,24 +86,22 @@ export const Property = ({offer, selectedCity, offers}) => {
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                  <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                 </div>
                 <span className="property__user-name">
-                  Angelina
+                  {host.name}
                 </span>
+                {host.isPro && <span className="property__user-status">Pro</span>}
               </div>
               <div className="property__description">
                 <p className="property__text">
-                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                </p>
-                <p className="property__text">
-                  An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                  {description}
                 </p>
               </div>
             </div>
             <section className="property__reviews reviews">
-              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-              {<ReviewsList reviews={reviews} />}
+              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentsCurrentOffer.length}</span></h2>
+              {<ReviewsList reviews={commentsCurrentOffer} />}
               <form className="reviews__form form" action="#" method="post">
                 <label className="reviews__label form__label" htmlFor="review">Your review</label>
                 <div className="reviews__rating-form form__rating">
@@ -162,19 +151,29 @@ export const Property = ({offer, selectedCity, offers}) => {
             </section>
           </div>
         </div>
-        <section className="property__map map">{<Map selectedCity={selectedCity} offers={offers.slice(0, 3)}/>}</section>
+        <section className="property__map map">{<Map selectedCity={selectedCity} offers={nearOffers}/>}</section>
       </section>
       <div className="container">
         <NearOffers
-          offers={offers.slice(0, 3)}
+          offers={nearOffers}
         />
       </div>
     </main>
   );
 };
 
+const mapStateToProps = (state) => ({
+  commentsCurrentOffer: getComments(state),
+  nearOffers: getNearOffers(state),
+  selectedCity: getSelectedCity(state),
+});
+
+
 Property.propTypes = {
   offer: OfferPropTypes,
   selectedCity: CityPropTypes.isRequired,
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  nearOffers: PropTypes.arrayOf(OfferPropTypes),
+  commentsCurrentOffer: PropTypes.arrayOf(ReviewPropTypes).isRequired,
 };
+
+export default connect(mapStateToProps)(Property);

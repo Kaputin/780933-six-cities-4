@@ -1,48 +1,58 @@
 import PropTypes from 'prop-types';
 
 export const OfferPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
   bedrooms: PropTypes.number.isRequired,
-  adults: PropTypes.number.isRequired,
+  city: {
+    location: {
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    },
+    name: PropTypes.string.isRequired,
+  },
+  description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-  rating: PropTypes.number.isRequired,
-  city: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  mark: PropTypes.bool.isRequired,
+  host: {
+    avatarUrl: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired
+  },
+  id: PropTypes.number.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  isPremium: PropTypes.bool.isRequired,
+  location: {
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired
+  },
+  maxAdults: PropTypes.number.isRequired,
+  previewImage: PropTypes.arrayOf(PropTypes.string).isRequired,
   price: PropTypes.number.isRequired,
-  src: PropTypes.string.isRequired,
-  stars: PropTypes.object.isRequired,
+  rating: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    commentId: PropTypes.number.isRequired,
-    commentRating: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      userId: PropTypes.number.isRequired,
-      pro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired).isRequired
+  type: PropTypes.string.isRequired
 });
 
 export const CityPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+  name: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired
 });
 
 export const ReviewPropTypes = PropTypes.shape({
   comment: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
-  commentId: PropTypes.number.isRequired,
-  commentRating: PropTypes.string.isRequired,
   user: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
     userId: PropTypes.number.isRequired,
-    pro: PropTypes.bool.isRequired,
+    isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 });

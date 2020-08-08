@@ -10,49 +10,43 @@ import {withSorting} from "../../hocs/with-sorting/with-sorting.js";
 
 const SortingOptionsWrapped = withSorting(SortingOptions);
 
-export const Main = ({offers, cities, selectedCity}) => {
+export const Main = ({offers, selectedCity}) => {
+  const offersExist = offers.length !== 0;
 
   return (
     <main className={`page__main page__main--index ${offers.length === 0 ? `page__main--index-empty` : ``}` }>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesList
-            cities={cities}
-          />
+          <CitiesList />
         </section>
       </div>
-      {offers.length === 0
-        ?
-        <MainEmpty selectedCity={selectedCity}/>
-        :
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {selectedCity.title}</b>
-              {<SortingOptionsWrapped />}
-              <OffersList
+      {offersExist &&
+      <div className="cities">
+        <div className="cities__places-container container">
+          <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+            {<SortingOptionsWrapped />}
+            <OffersList
+              offers={offers}
+            />
+          </section>
+          <div className="cities__right-section">
+            <section className="cities__map map">
+              <Map
                 offers={offers}
               />
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  selectedCity={selectedCity}
-                  offers={offers}
-                />
-              </section>
-            </div>
           </div>
         </div>
-      }
+      </div>}
+      {!offersExist && <MainEmpty selectedCity={selectedCity}/>}
     </main>
   );
 };
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes),
-  cities: PropTypes.arrayOf(CityPropTypes).isRequired,
   selectedCity: CityPropTypes.isRequired,
 };

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
+import {getHoveredOffer, getSelectedCity} from "../../reducer/state/selectors.js";
 
 const offerIcon = leaflet.icon({
   iconUrl: `img/pin.svg`,
@@ -13,8 +14,6 @@ const activeOfferIcon = leaflet.icon({
   iconUrl: `img/pin-active.svg`,
   iconSize: [27, 39]
 });
-
-const DEFAULT_ZOOM_LEVEL = 12;
 
 export class Map extends PureComponent {
   constructor(props) {
@@ -45,19 +44,23 @@ export class Map extends PureComponent {
 
   _updateMap() {
     const {selectedCity} = this.props;
-    this.map.setView(selectedCity.coordinates, DEFAULT_ZOOM_LEVEL);
+    const coordinates = [selectedCity.location.latitude, selectedCity.location.longitude];
+    const zoom = selectedCity.location.zoom;
+    this.map.setView(coordinates, zoom);
   }
 
   _initializeMap() {
     const {selectedCity} = this.props;
+    const coordinates = [selectedCity.location.latitude, selectedCity.location.longitude];
+    const zoom = selectedCity.location.zoom;
     this.map = leaflet.map(this.mapRef.current, {
-      center: selectedCity.coordinates,
-      zoom: DEFAULT_ZOOM_LEVEL,
+      center: coordinates,
+      zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(selectedCity.coordinates, DEFAULT_ZOOM_LEVEL);
+    this.map.setView(coordinates, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -71,9 +74,10 @@ export class Map extends PureComponent {
     this.markers = [];
 
     offers.forEach((offer) => {
-      const offerCords = offer.coordinates;
+      const offerCords = [offer.location.latitude, offer.location.longitude];
+
       if (offerCords.length) {
-        if (hoveredOffer && offerCords === hoveredOffer.coordinates) {
+        if (hoveredOffer && offerCords === [hoveredOffer.location.latitude, hoveredOffer.location.longitude]) {
           const marker = leaflet
           .marker(offerCords, {icon: activeOfferIcon})
           .addTo(this.map);
@@ -105,7 +109,8 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer,
+  hoveredOffer: getHoveredOffer(state),
+  selectedCity: getSelectedCity(state),
 });
 
 export default connect(mapStateToProps)(Map);

@@ -3,14 +3,17 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {SortingOptions} from "./sorting-options.jsx";
+import {NameSpace} from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
 it(`Should SortingOptions render correctly`, () => {
   const store = mockStore({
-    currentOffer: null,
-    hoveredOffer: null,
-    selectedSortingOptions: `Popular`
+    [NameSpace.STATE]: {
+      currentOffer: null,
+      hoveredOffer: null,
+      selectedSortingOptions: `Popular`
+    },
   });
 
   const tree = renderer
