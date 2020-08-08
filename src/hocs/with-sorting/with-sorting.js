@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
+import {getSelectedSortingOptions} from "../../reducer/state/selectors.js";
 
 export const withSorting = (Component) => {
   class WithSorting extends PureComponent {
@@ -51,12 +52,12 @@ export const withSorting = (Component) => {
   };
 
   const mapStateToProps = (state) => ({
-    selectedSortingOptions: state.selectedSortingOptions,
+    selectedSortingOptions: getSelectedSortingOptions(state),
   });
 
   const mapDispatchToProps = (dispatch) => ({
     onSortingOptionClick(sortingOption) {
-      dispatch(ActionCreator.changeSortOption(sortingOption));
+      dispatch(StateActionCreator.changeSortOption(sortingOption));
     },
   });
 

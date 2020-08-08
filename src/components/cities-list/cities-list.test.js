@@ -8,49 +8,54 @@ const mockStore = configureStore([]);
 
 const citiesTest = [
   {
-    id: 1,
-    title: `Amsterdam`,
-    coordinates: [52.38333, 4.9]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam`,
   },
   {
-    id: 2,
-    title: `Paris`,
-    coordinates: [48.85341, 2.3488]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam1`,
   },
   {
-    id: 3,
-    title: `Cologne`,
-    coordinates: [50.93333, 6.95]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam2`,
   },
   {
-    id: 4,
-    title: `Brussels`,
-    coordinates: [50.85045, 4.34878]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam3`,
   },
   {
-    id: 5,
-    title: `Hamburg`,
-    coordinates: [53.57532, 10.01534]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam4`,
   },
   {
-    id: 6,
-    title: `Dusseldorf`,
-    coordinates: [51.1722, 6.46]
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam5`,
   }
 ];
-
-// it(`Should OffersList render correctly`, () => {
-//   const tree = renderer
-//     .create(
-//       <CitiesList
-//         cities={cities}
-//         selectedCity={selectedCity}
-//         onCityTitleClick={() => {}}
-//       />)
-//     .toJSON();
-//
-//   expect(tree).toMatchSnapshot();
-// });
 
 it(`Should CitysList render correctly`, () => {
   const store = mockStore({

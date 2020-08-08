@@ -12,7 +12,7 @@ export class ReviewsList extends PureComponent {
         {reviews.map((review) =>
           <Review
             review={review}
-            key={review.commentId}
+            key={review.id}
           />)
         }
       </ul>

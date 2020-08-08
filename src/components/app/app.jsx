@@ -2,15 +2,14 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Main} from "../main/main.jsx";
-import {Property} from "../property/property.jsx";
+import Property from "../property/property.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
+import {getSelectedCity, getCurrentOffer, getSortOffers} from "../../reducer/state/selectors.js";
 
 export class App extends PureComponent {
   _renderApp() {
     const {
-      cities,
       selectedCityOffers,
       selectedCity,
       currentOffer,
@@ -20,7 +19,6 @@ export class App extends PureComponent {
       return (
         <Main
           offers={selectedCityOffers}
-          cities={cities}
           selectedCity={selectedCity}
         />
       );
@@ -28,8 +26,6 @@ export class App extends PureComponent {
     return (
       <Property
         offer={currentOffer}
-        selectedCity={selectedCity}
-        offers={selectedCityOffers}
       />
     );
   }
@@ -44,8 +40,6 @@ export class App extends PureComponent {
           <Route exact path="/dev-component">
             <Property
               offer={this.props.selectedCityOffers[0]}
-              selectedCity={this.props.cities[0]}
-              offers={this.props.selectedCityOffers}
             />
           </Route>
         </Switch>
@@ -55,17 +49,15 @@ export class App extends PureComponent {
 }
 
 App.propTypes = {
-  cities: PropTypes.arrayOf(CityPropTypes).isRequired,
   selectedCityOffers: PropTypes.arrayOf(OfferPropTypes),
   selectedCity: CityPropTypes.isRequired,
   currentOffer: OfferPropTypes,
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
-  selectedCityOffers: state.selectedCityOffers,
-  selectedCity: state.selectedCity,
-  currentOffer: state.currentOffer,
+  selectedCity: getSelectedCity(state),
+  selectedCityOffers: getSortOffers(state),
+  currentOffer: getCurrentOffer(state),
 });
 
 export default connect(mapStateToProps)(App);
