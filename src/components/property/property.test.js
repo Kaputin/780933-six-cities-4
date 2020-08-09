@@ -3,9 +3,12 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {Property} from "./property.jsx";
+import {AuthorizationStatus} from "../../const.js";
 import {NameSpace} from "../../reducer/name-space.js";
+import thunk from "redux-thunk";
+import {StaticRouter as Router} from "react-router-dom";
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const offer = {
   bedrooms: 3,
@@ -140,34 +143,88 @@ const reviews = [
   }
 ];
 
-const selectedCity = {
-  location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
-    zoom: 10
+const citiesTest = [
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam`,
   },
-  name: `Amsterdam`,
-};
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam1`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam2`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam3`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam4`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam5`,
+  }
+];
 
 it(`Should Property render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
-      currentOffer: null,
-      hoveredOffer: null,
+      selectedCity: citiesTest[0],
       selectedSortingOptions: `Popular`,
-      selectedCity
+      hoveredOffer: null,
+    },
+    [NameSpace.DATA]: {
+      selectedOffers,
+      cities: citiesTest,
+      nearOffers: [],
+      commentsCurrentOffer: [],
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userProfile: {},
     },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Property
-            offer={offer}
-            selectedCity={selectedCity}
-            nearOffers={selectedOffers}
-            commentsCurrentOffer={reviews}
-          />,
+          <Router>
+            <Property
+              offer={offer}
+              selectedCity={citiesTest[0]}
+              nearOffers={selectedOffers}
+              commentsCurrentOffer={reviews}
+              loadData={() => {}}
+            />,
+          </Router>
         </Provider>,
         {
           createNodeMock: () => document.createElement(`div`)

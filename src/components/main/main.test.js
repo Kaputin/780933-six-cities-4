@@ -3,9 +3,12 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {Main} from "./main.jsx";
+import {AuthorizationStatus} from "../../const.js";
 import {NameSpace} from "../../reducer/name-space.js";
+import thunk from "redux-thunk";
+import {StaticRouter as Router} from "react-router-dom";
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const selectedOffers = [
   {
@@ -132,24 +135,31 @@ const citiesTest = [
 it(`Should Main render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
-      currentOffer: null,
-      hoveredOffer: null,
+      selectedCity: citiesTest[0],
       selectedSortingOptions: `Popular`,
-      selectedCity: citiesTest[0]
+      hoveredOffer: null,
     },
     [NameSpace.DATA]: {
-      offers: selectedOffers,
+      selectedOffers,
       cities: citiesTest,
+      nearOffers: [],
+      commentsCurrentOffer: [],
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userProfile: {},
     },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main
-            offers={selectedOffers}
-            selectedCity={citiesTest[0]}
-          />,
+          <Router>
+            <Main
+              offers={selectedOffers}
+              selectedCity={citiesTest[0]}
+            />,
+          </Router>
         </Provider>,
         {
           createNodeMock: () => document.createElement(`div`)

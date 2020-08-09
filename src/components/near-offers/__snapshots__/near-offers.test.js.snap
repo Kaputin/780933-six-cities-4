@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should OffersList render correctly 1`] = `
+exports[`Should NearOffersList render correctly 1`] = `
 <section
   className="near-places places"
 >
@@ -95,10 +95,10 @@ exports[`Should OffersList render correctly 1`] = `
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
-            href="#"
+            href="/offer/0"
+            onClick={[Function]}
           >
             Beautiful & luxurious apartment at great location
           </a>
@@ -193,10 +193,10 @@ exports[`Should OffersList render correctly 1`] = `
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
-            href="#"
+            href="/offer/1"
+            onClick={[Function]}
           >
             Beautiful & luxurious apartment at great location
           </a>

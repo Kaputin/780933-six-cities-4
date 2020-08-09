@@ -42,37 +42,13 @@ const offer = {
   type: `Apartment`,
 };
 
-const onOfferTitleClick = jest.fn();
 const onOfferHover = jest.fn();
-
-describe(`PlaceCard e2e tests`, () => {
-  it(`Should OfferTitle be pressed`, () => {
-
-    const placeCard = shallow(
-        <PlaceCard
-          onOfferTitleClick={onOfferTitleClick}
-          onOfferHover={onOfferHover}
-          offer={offer}
-          key={offer.id}
-          cardClass={`cities__place-card`}
-          wrapperClass={`cities__image-wrapper`}
-        />
-    );
-
-    const offerTitle = placeCard.find(`h2.place-card__name`);
-
-    offerTitle.first().simulate(`click`);
-
-    expect(onOfferTitleClick).toHaveBeenCalled();
-  });
-});
 
 describe(`Offer select e2e`, () => {
   it(`Should Offer be selected`, () => {
 
     const placeCard = shallow(
         <PlaceCard
-          onOfferTitleClick={onOfferTitleClick}
           onOfferHover={onOfferHover}
           offer={offer}
           key={offer.id}

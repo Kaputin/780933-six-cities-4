@@ -22,16 +22,16 @@ export const ActionCreator = {
       payload: offers,
     };
   },
-  loadComments: (offerId) => {
+  loadComments: (loadedcomments) => {
     return {
       type: ActionType.LOAD_COMMENTS,
-      payload: offerId,
+      payload: loadedcomments,
     };
   },
-  loadNearOffers: (offerId) => {
+  loadNearOffers: (loadedNearOffers) => {
     return {
       type: ActionType.LOAD_NEAR_OFFERS,
-      payload: offerId,
+      payload: loadedNearOffers,
     };
   },
 };

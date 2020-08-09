@@ -15,3 +15,9 @@ export const getComments = (state) => {
 export const getNearOffers = (state) => {
   return state[NameSpace.DATA].nearOffers;
 };
+
+export const getOfferById = (state, id) => {
+  const offers = getOffers(state);
+  const filtredOffers = offers.filter((item) => item.id === Number(id));
+  return filtredOffers[0];
+};

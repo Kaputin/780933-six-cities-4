@@ -3,9 +3,12 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {OffersList} from "./offers-list.jsx";
+import {AuthorizationStatus} from "../../const.js";
 import {NameSpace} from "../../reducer/name-space.js";
+import thunk from "redux-thunk";
+import {StaticRouter as Router} from "react-router-dom";
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const offers = [
   {
@@ -78,21 +81,84 @@ const offers = [
   }
 ];
 
+const citiesTest = [
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam1`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam2`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam3`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam4`,
+  },
+  {
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
+    },
+    name: `Amsterdam5`,
+  }
+];
+
 it(`Should OffersList render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
-      currentOffer: null,
+      selectedCity: citiesTest[0],
+      selectedSortingOptions: `Popular`,
       hoveredOffer: null,
-      selectedSortingOptions: `Popular`
+    },
+    [NameSpace.DATA]: {
+      selectedOffers: offers,
+      cities: citiesTest,
+      nearOffers: [],
+      commentsCurrentOffer: [],
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userProfile: {},
     },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <OffersList
-            offers={offers}
-          />
+          <Router>
+            <OffersList
+              offers={offers}
+            />
+          </Router>
         </Provider>)
     .toJSON();
 

@@ -16,3 +16,7 @@ export const getUniqueCities = (offers) => {
 };
 
 export const formatDate = (dateString) => new Date(dateString).toLocaleDateString(`en`, {month: `long`, year: `numeric`});
+
+export const formatRating = (rating) => rating * 20 + `%`;
+
+export const capitalize = (str) => str.replace(/(^|\s)\S/g, (a) => a.toUpperCase());
