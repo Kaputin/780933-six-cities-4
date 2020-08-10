@@ -2,10 +2,13 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {App} from "./app.jsx";
+import App from "./app.jsx";
 import {NameSpace} from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../const.js";
+import thunk from "redux-thunk";
+import {StaticRouter as Router} from "react-router-dom";
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const selectedOffers = [
   {
@@ -129,30 +132,68 @@ const citiesTest = [
   }
 ];
 
+// it(`Render App`, () => {
+//   const store = mockStore({
+//     [NameSpace.STATE]: {
+//       selectedCity: citiesTest[0],
+//       selectedSortingOptions: `Popular`,
+//       hoveredOffer: null,
+//     },
+//     [NameSpace.DATA]: {
+//       selectedOffers,
+//       cities: citiesTest,
+//       nearOffers: [],
+//       commentsCurrentOffer: [],
+//     },
+//     [NameSpace.USER]: {
+//       authorizationStatus: AuthorizationStatus.NO_AUTH,
+//       userProfile: {},
+//     },
+//   });
+//
+//   const tree = renderer
+//     .create(
+//         <Provider store={store}>
+//           <App
+//             selectedCityOffers={selectedOffers}
+//             selectedCity={citiesTest[0]}/>,
+//         </Provider>,
+//         {
+//           createNodeMock: () => document.createElement(`div`)
+//         })
+//     .toJSON();
+//
+//   expect(tree).toMatchSnapshot();
+// });
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
-      currentOffer: null,
-      hoveredOffer: null,
+      selectedCity: citiesTest[0],
       selectedSortingOptions: `Popular`,
-      selectedCity: citiesTest[0]
+      hoveredOffer: null,
     },
     [NameSpace.DATA]: {
+      selectedOffers,
       cities: citiesTest,
+      nearOffers: [],
+      commentsCurrentOffer: [],
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userProfile: {},
     },
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            cities={citiesTest}
-            selectedCityOffers={selectedOffers}
-            selectedCity={citiesTest[0]}/>,
-        </Provider>,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        })
+          <Router>
+            <App
+              selectedCityOffers={selectedOffers}
+              selectedCity={citiesTest[0]}/>,
+          </Router>
+        </Provider>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -1,6 +1,6 @@
 import {extend, getUniqueCities} from "../../utils.js";
 import {parseOffer} from "../../adapters/offers.jsx";
-import {parseComment} from "../../adapters/comments.jsx";
+import {parseComment, parseCommentToPost} from "../../adapters/comments.jsx";
 
 const initialState = {
   offers: [],
@@ -22,16 +22,16 @@ export const ActionCreator = {
       payload: offers,
     };
   },
-  loadComments: (offerId) => {
+  loadComments: (loadedcomments) => {
     return {
       type: ActionType.LOAD_COMMENTS,
-      payload: offerId,
+      payload: loadedcomments,
     };
   },
-  loadNearOffers: (offerId) => {
+  loadNearOffers: (loadedNearOffers) => {
     return {
       type: ActionType.LOAD_NEAR_OFFERS,
-      payload: offerId,
+      payload: loadedNearOffers,
     };
   },
 };
@@ -53,6 +53,13 @@ export const Operation = {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
         dispatch(ActionCreator.loadNearOffers(response.data));
+      });
+  },
+  sendComment: (id, newComment) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, parseCommentToPost(newComment))
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(response.data));
+        return response;
       });
   },
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {PlaceCard} from "./place-card.jsx";
+import {PostCommentForm} from "./post-comment-form.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {AuthorizationStatus} from "../../const.js";
@@ -167,7 +167,7 @@ const citiesTest = [
   }
 ];
 
-it(`Should PlaceCard render correctly`, () => {
+it(`Should PostCommentForm render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
       selectedCity: citiesTest[0],
@@ -190,12 +190,16 @@ it(`Should PlaceCard render correctly`, () => {
     .create(
         <Provider store={store}>
           <Router>
-            <PlaceCard
-              onOfferHover={() => {}}
+            <PostCommentForm
               offer={offer}
-              key={offer.id}
-              cardClass={`cities__place-card`}
-              wrapperClass={`cities__image-wrapper`}
+              review={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`}
+              rating={`4`}
+              isDisabled={false}
+              isError={false}
+              errorMessage={``}
+              onInputChange={() => {}}
+              onSubmit={() => {}}
+              sendComment={() => {}}
             />,
           </Router>
         </Provider>)

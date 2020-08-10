@@ -6,12 +6,12 @@ import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 import {getHoveredOffer, getSelectedCity} from "../../reducer/state/selectors.js";
 
 const offerIcon = leaflet.icon({
-  iconUrl: `img/pin.svg`,
+  iconUrl: `/img/pin.svg`,
   iconSize: [27, 39]
 });
 
 const activeOfferIcon = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
+  iconUrl: `/img/pin-active.svg`,
   iconSize: [27, 39]
 });
 
@@ -77,7 +77,7 @@ export class Map extends PureComponent {
       const offerCords = [offer.location.latitude, offer.location.longitude];
 
       if (offerCords.length) {
-        if (hoveredOffer && offerCords === [hoveredOffer.location.latitude, hoveredOffer.location.longitude]) {
+        if (hoveredOffer && hoveredOffer.id === offer.id) {
           const marker = leaflet
           .marker(offerCords, {icon: activeOfferIcon})
           .addTo(this.map);
