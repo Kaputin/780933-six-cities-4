@@ -1,4 +1,5 @@
 import {NameSpace} from "../name-space.js";
+import {MAX_NEAR_CITIES} from "../../const.js";
 
 export const getOffers = (state) => {
   return state[NameSpace.DATA].offers;
@@ -13,7 +14,7 @@ export const getComments = (state) => {
 };
 
 export const getNearOffers = (state) => {
-  return state[NameSpace.DATA].nearOffers;
+  return state[NameSpace.DATA].nearOffers.slice(0, MAX_NEAR_CITIES);
 };
 
 export const getOfferById = (state, id) => {

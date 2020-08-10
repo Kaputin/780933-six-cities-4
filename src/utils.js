@@ -1,3 +1,5 @@
+import {MAX_CITIES_COUNT} from "./const.js";
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -10,7 +12,7 @@ export const getUniqueCities = (offers) => {
   };
 
   const allCities = offers.map((offer) => offer.city);
-  const uniqueCities = getUniqueObjectsArray(allCities, `name`).slice(0, 6);
+  const uniqueCities = getUniqueObjectsArray(allCities, `name`).slice(0, MAX_CITIES_COUNT);
 
   return uniqueCities;
 };

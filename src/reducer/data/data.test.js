@@ -1,5 +1,8 @@
-// import {reducer, ActionCreator, ActionType} from "./data.js";
-import {reducer, ActionType} from "./data.js";
+import MockAdapter from "axios-mock-adapter";
+import {createAPI} from "../../api.js";
+import {reducer, ActionCreator, ActionType, Operation} from "./data.js";
+
+const api = createAPI(() => {});
 
 const offers = [
   {
@@ -258,37 +261,62 @@ it(`Reducer must return comments`, () => {
     commentsCurrentOffer: comments,
   });
 });
-//
-// it(`Reducer must return near offers`, () => {
-//   expect(reducer({
-//     selectedCity: defaultCity,
-//     selectedSortingOptions: sortingOptions[1],
-//     hoveredOffer: null,
-//   }, {
-//     type: ActionType.CHANGE_HOVERED_OFFER,
-//     payload: offers[0],
-//   })).toEqual({
-//     selectedCity: defaultCity,
-//     selectedSortingOptions: sortingOptions[1],
-//     hoveredOffer: offers[0],
-//   });
-// });
-//
-// describe(`Action creators work correctly`, () => {
-//   it(`Action creator for require authorization returns correct action`, () => {
-//     expect(ActionCreator.changeCity(citiesTest[1])).toEqual({
-//       type: ActionType.CHANGE_CITY,
-//       payload: citiesTest[1],
-//     });
-//
-//     expect(ActionCreator.changeSortOption(sortingOptions[1])).toEqual({
-//       type: ActionType.CHANGE_SORT_OPTION,
-//       payload: sortingOptions[1],
-//     });
-//
-//     expect(ActionCreator.changeHoveredOffer(offers[0])).toEqual({
-//       type: ActionType.CHANGE_HOVERED_OFFER,
-//       payload: offers[0],
-//     });
-//   });
-// });
+
+it(`Reducer must return nearOffers`, () => {
+  expect(reducer({
+    offers,
+    cities: citiesTest,
+    nearOffers: [],
+    commentsCurrentOffer: [],
+  }, {
+    type: ActionType.LOAD_NEAR_OFFERS,
+    payload: serverOffers,
+  })).toEqual({
+    offers,
+    cities: citiesTest,
+    nearOffers: offers,
+    commentsCurrentOffer: [],
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator for require authorization returns correct action`, () => {
+    expect(ActionCreator.loadOffers(offers)).toEqual({
+      type: ActionType.LOAD_OFFERS,
+      payload: offers,
+    });
+
+    expect(ActionCreator.loadComments(comments)).toEqual({
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    });
+
+    expect(ActionCreator.loadNearOffers(offers)).toEqual({
+      type: ActionType.LOAD_NEAR_OFFERS,
+      payload: offers,
+    });
+  });
+});
+
+
+describe(`Operation work correctly`, () => {
+  it(`Should make a correct API call to /hotels`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const onSuccess = jest.fn();
+    const offerLoader = Operation.loadOffers(onSuccess);
+
+    apiMock
+      .onGet(`/hotels`)
+      .reply(200, [{fake: true}]);
+
+    return offerLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_OFFERS,
+          payload: [{fake: true}],
+        });
+      });
+  });
+});
