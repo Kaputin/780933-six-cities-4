@@ -132,7 +132,7 @@ const citiesTest = [
   }
 ];
 
-it(`Should NearOffersList render correctly`, () => {
+it(`Should NearOffers render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
       selectedCity: citiesTest[0],

@@ -21,6 +21,7 @@ export class Property extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.bookmarkButtonClickHandler = this.bookmarkButtonClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,10 @@ export class Property extends PureComponent {
     }
   }
 
+  bookmarkButtonClickHandler(offer) {
+    this.props.onBookmarkButtonClick(offer);
+  }
+
   render() {
     const {offer, selectedCity, nearOffers, commentsCurrentOffer, authorizationStatus} = this.props;
     const {
@@ -45,6 +50,7 @@ export class Property extends PureComponent {
       rating,
       type,
       isPremium,
+      isFavorite,
       price,
       title,
       host,
@@ -72,8 +78,21 @@ export class Property extends PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
+                  <button
+                    className={`${isFavorite ? `property__bookmark-button--active` : ``} property__bookmark-button button`}
+                    type="button"
+                    onClick={() => {
+                      if (authorizationStatus === AuthorizationStatus.AUTH) {
+                        this.bookmarkButtonClickHandler(offer);
+                      }
+                    }}
+                  >
+                    <svg
+                      className="property__bookmark-icon"
+                      width="31"
+                      height="33"
+                      style={{stroke: (isFavorite ? `#4481c3` : ``), fill: (isFavorite ? `#4481c3` : ``)}}
+                    >
                       <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
@@ -148,6 +167,16 @@ export class Property extends PureComponent {
   }
 }
 
+Property.propTypes = {
+  offer: OfferPropTypes,
+  selectedCity: CityPropTypes.isRequired,
+  nearOffers: PropTypes.arrayOf(OfferPropTypes),
+  commentsCurrentOffer: PropTypes.arrayOf(ReviewPropTypes).isRequired,
+  loadData: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  onBookmarkButtonClick: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state, props) => ({
   offer: getOfferById(state, props.match.params.id),
   commentsCurrentOffer: getComments(state),
@@ -161,15 +190,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.loadComments(currentOfferId));
     dispatch(DataOperation.loadNearOffers(currentOfferId));
   },
+  onBookmarkButtonClick(offer) {
+    dispatch(DataOperation.changeFavorite(offer));
+  },
 });
-
-Property.propTypes = {
-  offer: OfferPropTypes,
-  selectedCity: CityPropTypes.isRequired,
-  nearOffers: PropTypes.arrayOf(OfferPropTypes),
-  commentsCurrentOffer: PropTypes.arrayOf(ReviewPropTypes).isRequired,
-  loadData: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Property);

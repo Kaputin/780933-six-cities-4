@@ -75,6 +75,77 @@ const offers = [
   }
 ];
 
+const newOffers = [
+  {
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10
+      },
+      name: `Amsterdam`,
+    },
+    description: `123`,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    host: {
+      avatarUrl: `img/avatar-max.jpg`,
+      id: 4,
+      isPro: false,
+      name: `Max`,
+    },
+    id: 0,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    isFavorite: true,
+    isPremium: false,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
+    price: 120,
+    rating: 4,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  },
+  {
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10
+      },
+      name: `Paris`,
+    },
+    description: `123`,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    host: {
+      avatarUrl: `img/avatar-max.jpg`,
+      id: 4,
+      isPro: false,
+      name: `Max`,
+    },
+    id: 1,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
+    price: 120,
+    rating: 4,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  }
+];
+
 const serverOffers = [
   {
     "bedrooms": 3,
@@ -225,6 +296,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     cities: [],
     nearOffers: [],
     commentsCurrentOffer: [],
+    favoriteOffers: [],
   });
 });
 
@@ -234,6 +306,7 @@ it(`Reducer must return another cities & offers`, () => {
     cities: [],
     nearOffers: [],
     commentsCurrentOffer: [],
+    favoriteOffers: [],
   }, {
     type: ActionType.LOAD_OFFERS,
     payload: serverOffers,
@@ -242,6 +315,7 @@ it(`Reducer must return another cities & offers`, () => {
     cities: citiesTest,
     nearOffers: [],
     commentsCurrentOffer: [],
+    favoriteOffers: [],
   });
 });
 
@@ -251,6 +325,7 @@ it(`Reducer must return comments`, () => {
     cities: citiesTest,
     nearOffers: [],
     commentsCurrentOffer: [],
+    favoriteOffers: [],
   }, {
     type: ActionType.LOAD_COMMENTS,
     payload: serverComments,
@@ -259,6 +334,7 @@ it(`Reducer must return comments`, () => {
     cities: citiesTest,
     nearOffers: [],
     commentsCurrentOffer: comments,
+    favoriteOffers: [],
   });
 });
 
@@ -268,6 +344,7 @@ it(`Reducer must return nearOffers`, () => {
     cities: citiesTest,
     nearOffers: [],
     commentsCurrentOffer: [],
+    favoriteOffers: [],
   }, {
     type: ActionType.LOAD_NEAR_OFFERS,
     payload: serverOffers,
@@ -276,6 +353,22 @@ it(`Reducer must return nearOffers`, () => {
     cities: citiesTest,
     nearOffers: offers,
     commentsCurrentOffer: [],
+    favoriteOffers: [],
+  });
+});
+
+it(`Reducer should change isFavorite on offers, favoriteOffers, nearOffers`, () => {
+  expect(reducer({
+    offers,
+    nearOffers: offers,
+    favoriteOffers: [],
+  }, {
+    type: ActionType.CHANGE_FAVORITE,
+    payload: offers[0]
+  })).toEqual({
+    offers: newOffers,
+    nearOffers: newOffers,
+    favoriteOffers: [newOffers[0]],
   });
 });
 

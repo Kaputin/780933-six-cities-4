@@ -107,12 +107,19 @@ Array [
                 Beautiful & luxurious apartment at great location
               </h1>
               <button
-                className="property__bookmark-button button"
+                className=" property__bookmark-button button"
+                onClick={[Function]}
                 type="button"
               >
                 <svg
                   className="property__bookmark-icon"
                   height="33"
+                  style={
+                    Object {
+                      "fill": "",
+                      "stroke": "",
+                    }
+                  }
                   width="31"
                 >
                   <use
@@ -481,7 +488,8 @@ Array [
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className=" place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -579,7 +587,8 @@ Array [
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className=" place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg

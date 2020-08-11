@@ -22,3 +22,14 @@ export const formatDate = (dateString) => new Date(dateString).toLocaleDateStrin
 export const formatRating = (rating) => rating * 20 + `%`;
 
 export const capitalize = (str) => str.replace(/(^|\s)\S/g, (a) => a.toUpperCase());
+
+export const changeKeyItemInArray = (array, newItem, key) => {
+  return array.map((item) => {
+    if (item.id === newItem.id) {
+      return extend(item, {
+        [key]: !item[key],
+      });
+    }
+    return item;
+  });
+};

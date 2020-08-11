@@ -24,7 +24,7 @@ export const Header = ({userProfile, authorizationStatus}) => {
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__login">Sign in</span>
                 </Link>}
-                {authorizationStatus === AuthorizationStatus.AUTH && <Link to="#" className="header__nav-link header__nav-link--profile">
+                {authorizationStatus === AuthorizationStatus.AUTH && <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">{userProfile.email}</span>
                 </Link>}

@@ -224,6 +224,7 @@ it(`Should Property render correctly`, () => {
               commentsCurrentOffer={reviews}
               loadData={() => {}}
               authorizationStatus={AuthorizationStatus.NO_AUTH}
+              onBookmarkButtonClick={() => {}}
             />,
           </Router>
         </Provider>,

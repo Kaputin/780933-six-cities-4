@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should NearOffersList render correctly 1`] = `
+exports[`Should Header render correctly 1`] = `
 <header
   className="header"
 >

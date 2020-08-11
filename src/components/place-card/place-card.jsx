@@ -6,23 +6,32 @@ import {OfferPropTypes} from "../../propTypes.js";
 import {Link} from "react-router-dom";
 import {getHoveredOffer} from "../../reducer/state/selectors.js";
 import {formatRating, capitalize} from "../../utils.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../const.js";
 
 export class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
     this.offerMouseEnterHandler = this.offerMouseEnterHandler.bind(this);
+    this.bookmarkButtonClickHandler = this.bookmarkButtonClickHandler.bind(this);
   }
 
   offerMouseEnterHandler(hoveredOffer) {
     this.props.onOfferHover(hoveredOffer);
   }
 
+  bookmarkButtonClickHandler(offer) {
+    this.props.onBookmarkButtonClick(offer);
+  }
+
   render() {
-    const {offer, cardClass, wrapperClass} = this.props;
+    const {offer, cardClass, wrapperClass, authorizationStatus} = this.props;
     const {
       id,
       isPremium,
+      isFavorite,
       previewImage,
       price,
       rating,
@@ -44,7 +53,15 @@ export class PlaceCard extends PureComponent {
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
+            <button
+              className={`${isFavorite ? `place-card__bookmark-button--active` : ``} place-card__bookmark-button button`}
+              type="button"
+              onClick={() => {
+                if (authorizationStatus === AuthorizationStatus.AUTH) {
+                  this.bookmarkButtonClickHandler(offer);
+                }
+              }}
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use href="#icon-bookmark"/>
               </svg>
@@ -72,15 +89,21 @@ PlaceCard.propTypes = {
   cardClass: PropTypes.string.isRequired,
   wrapperClass: PropTypes.string.isRequired,
   onOfferHover: PropTypes.func.isRequired,
+  onBookmarkButtonClick: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   hoveredOffer: getHoveredOffer(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferHover(hoveredOffer) {
     dispatch(StateActionCreator.changeHoveredOffer(hoveredOffer));
+  },
+  onBookmarkButtonClick(offer) {
+    dispatch(DataOperation.changeFavorite(offer));
   },
 });
 

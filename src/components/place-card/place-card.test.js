@@ -192,6 +192,8 @@ it(`Should PlaceCard render correctly`, () => {
           <Router>
             <PlaceCard
               onOfferHover={() => {}}
+              onBookmarkButtonClick={() => {}}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
               offer={offer}
               key={offer.id}
               cardClass={`cities__place-card`}

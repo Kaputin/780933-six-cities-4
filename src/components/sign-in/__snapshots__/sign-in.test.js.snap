@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should NearOffersList render correctly 1`] = `
+exports[`Should SignIn render correctly 1`] = `
 <div
   className="page page--gray page--login"
 >
