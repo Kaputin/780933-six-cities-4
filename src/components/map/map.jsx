@@ -70,29 +70,47 @@ export class Map extends PureComponent {
   }
 
   _createMarkers() {
-    const {offers, hoveredOffer} = this.props;
+    const {offers, hoveredOffer, selectedoffer} = this.props;
     this.markers = [];
 
-    offers.forEach((offer) => {
-      const offerCords = [offer.location.latitude, offer.location.longitude];
+    if (selectedoffer) {
+      const selectedofferCords = [selectedoffer.location.latitude, selectedoffer.location.longitude];
+      const selectedMarker = leaflet
+      .marker(selectedofferCords, {icon: activeOfferIcon})
+      .addTo(this.map);
 
-      if (offerCords.length) {
-        if (hoveredOffer && hoveredOffer.id === offer.id) {
-          const marker = leaflet
-          .marker(offerCords, {icon: activeOfferIcon})
-          .addTo(this.map);
+      this.markers.push(selectedMarker);
 
-          this.markers.push(marker);
-
-        } else {
-          const marker = leaflet
+      offers.forEach((offer) => {
+        const offerCords = [offer.location.latitude, offer.location.longitude];
+        const marker = leaflet
           .marker(offerCords, {icon: offerIcon})
           .addTo(this.map);
 
-          this.markers.push(marker);
+        this.markers.push(marker);
+      });
+    } else {
+      offers.forEach((offer) => {
+        const offerCords = [offer.location.latitude, offer.location.longitude];
+
+        if (offerCords.length) {
+          if (hoveredOffer && hoveredOffer.id === offer.id) {
+            const marker = leaflet
+            .marker(offerCords, {icon: activeOfferIcon})
+            .addTo(this.map);
+
+            this.markers.push(marker);
+
+          } else {
+            const marker = leaflet
+            .marker(offerCords, {icon: offerIcon})
+            .addTo(this.map);
+
+            this.markers.push(marker);
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   render() {
@@ -106,6 +124,7 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   hoveredOffer: OfferPropTypes,
   selectedCity: CityPropTypes.isRequired,
+  selectedoffer: OfferPropTypes,
 };
 
 const mapStateToProps = (state) => ({

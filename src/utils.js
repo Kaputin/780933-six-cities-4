@@ -33,3 +33,6 @@ export const changeKeyItemInArray = (array, newItem, key) => {
     return item;
   });
 };
+
+
+export const getSortedReviews = (array) => array.sort((a, b) => new Date(b.date) - new Date(a.date));

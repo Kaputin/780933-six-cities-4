@@ -106,10 +106,10 @@ Array [
               >
                 Beautiful & luxurious apartment at great location
               </h1>
-              <button
+              <a
                 className=" property__bookmark-button button"
+                href="/login"
                 onClick={[Function]}
-                type="button"
               >
                 <svg
                   className="property__bookmark-icon"
@@ -131,7 +131,7 @@ Array [
                 >
                   To bookmarks
                 </span>
-              </button>
+              </a>
             </div>
             <div
               className="property__rating rating"
@@ -487,10 +487,10 @@ Array [
                       / night
                     </span>
                   </div>
-                  <button
+                  <a
                     className=" place-card__bookmark-button button"
+                    href="/login"
                     onClick={[Function]}
-                    type="button"
                   >
                     <svg
                       className="place-card__bookmark-icon"
@@ -506,7 +506,7 @@ Array [
                     >
                       To bookmarks
                     </span>
-                  </button>
+                  </a>
                 </div>
                 <div
                   className="place-card__rating rating"
@@ -586,10 +586,10 @@ Array [
                       / night
                     </span>
                   </div>
-                  <button
+                  <a
                     className=" place-card__bookmark-button button"
+                    href="/login"
                     onClick={[Function]}
-                    type="button"
                   >
                     <svg
                       className="place-card__bookmark-icon"
@@ -605,7 +605,7 @@ Array [
                     >
                       To bookmarks
                     </span>
-                  </button>
+                  </a>
                 </div>
                 <div
                   className="place-card__rating rating"

@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ReviewsList} from "../reviews-list/reviews-list.jsx";
+import {Link} from "react-router-dom";
 import Map from "../map/map.jsx";
 import Header from "../header/header.jsx";
 import PostCommentForm from "../post-comment-form/post-comment-form.jsx";
@@ -12,7 +13,7 @@ import {AuthorizationStatus, MAX_PROPERTY_IMAGES, MAX_COMMENTS_COUNT} from "../.
 import {getSelectedCity} from "../../reducer/state/selectors.js";
 import {getComments, getNearOffers, getOfferById} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {formatRating, capitalize} from "../../utils.js";
+import {formatRating, capitalize, getSortedReviews} from "../../utils.js";
 import {withCommentForm} from '../../hocs/with-comment-form/with-comment-form.js';
 
 const PostCommentFormWrapped = withCommentForm(PostCommentForm);
@@ -78,14 +79,10 @@ export class Property extends PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button
+                  <Link
+                    to={authorizationStatus === AuthorizationStatus.AUTH ? {} : `/login`}
                     className={`${isFavorite ? `property__bookmark-button--active` : ``} property__bookmark-button button`}
-                    type="button"
-                    onClick={() => {
-                      if (authorizationStatus === AuthorizationStatus.AUTH) {
-                        this.bookmarkButtonClickHandler(offer);
-                      }
-                    }}
+                    onClick={authorizationStatus === AuthorizationStatus.AUTH ? () => this.bookmarkButtonClickHandler(offer) : null}
                   >
                     <svg
                       className="property__bookmark-icon"
@@ -96,7 +93,7 @@ export class Property extends PureComponent {
                       <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  </Link>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -149,12 +146,12 @@ export class Property extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentsCurrentOffer.length}</span></h2>
-                  {<ReviewsList reviews={commentsCurrentOffer.slice(0, MAX_COMMENTS_COUNT)} />}
+                  {<ReviewsList reviews={getSortedReviews(commentsCurrentOffer.slice(0, MAX_COMMENTS_COUNT))} />}
                   {authorizationStatus === AuthorizationStatus.AUTH && <PostCommentFormWrapped offer={offer}/>}
                 </section>
               </div>
             </div>
-            <section className="property__map map">{<Map selectedCity={selectedCity} offers={nearOffers}/>}</section>
+            <section className="property__map map">{<Map selectedCity={selectedCity} offers={nearOffers} selectedoffer={offer}/>}</section>
           </section>
           <div className="container">
             <NearOffers

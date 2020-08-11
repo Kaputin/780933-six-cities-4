@@ -21,7 +21,7 @@ export class Favorites extends PureComponent {
     const favoriteOffersExist = favoriteOffers.length !== 0;
 
     return (
-      <div className={`page ${favoriteOffersExist ? `` : `ppage--favorites-empty`}`}>
+      <div className={`page ${favoriteOffersExist ? `` : `page--favorites-empty`}`}>
         <Header />
         <main className={`page__main page__main--favorites ${favoriteOffersExist ? `` : `page__main--favorites-empty`}`}>
           <div className="page__favorites-container container">
