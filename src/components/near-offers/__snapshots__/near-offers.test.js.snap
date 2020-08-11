@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should NearOffersList render correctly 1`] = `
+exports[`Should NearOffers render correctly 1`] = `
 <section
   className="near-places places"
 >
@@ -53,9 +53,10 @@ exports[`Should NearOffersList render correctly 1`] = `
               / night
             </span>
           </div>
-          <button
-            className="place-card__bookmark-button button"
-            type="button"
+          <a
+            className=" place-card__bookmark-button button"
+            href="/login"
+            onClick={[Function]}
           >
             <svg
               className="place-card__bookmark-icon"
@@ -71,7 +72,7 @@ exports[`Should NearOffersList render correctly 1`] = `
             >
               To bookmarks
             </span>
-          </button>
+          </a>
         </div>
         <div
           className="place-card__rating rating"
@@ -151,9 +152,10 @@ exports[`Should NearOffersList render correctly 1`] = `
               / night
             </span>
           </div>
-          <button
-            className="place-card__bookmark-button button"
-            type="button"
+          <a
+            className=" place-card__bookmark-button button"
+            href="/login"
+            onClick={[Function]}
           >
             <svg
               className="place-card__bookmark-icon"
@@ -169,7 +171,7 @@ exports[`Should NearOffersList render correctly 1`] = `
             >
               To bookmarks
             </span>
-          </button>
+          </a>
         </div>
         <div
           className="place-card__rating rating"

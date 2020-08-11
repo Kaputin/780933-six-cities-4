@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Main} from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import {OfferPropTypes, CityPropTypes} from "../../propTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {getSelectedCity, getSortOffers} from "../../reducer/state/selectors.js";
@@ -26,6 +28,15 @@ export class App extends PureComponent {
           </Route>
           <Route exact path="/login" component={SignIn}/>
           <Route exact path="/offer/:id" component={Property}/>
+          <PrivateRoute
+            exact
+            path="/favorites"
+            render={() => {
+              return (
+                <Favorites/>
+              );
+            }}
+          />
         </Switch>
       </BrowserRouter>
     );
@@ -34,6 +45,7 @@ export class App extends PureComponent {
 
 App.propTypes = {
   selectedCityOffers: PropTypes.arrayOf(OfferPropTypes),
+  favoriteOffers: PropTypes.arrayOf(OfferPropTypes),
   selectedCity: CityPropTypes.isRequired,
 };
 

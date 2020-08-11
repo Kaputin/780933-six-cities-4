@@ -15,7 +15,7 @@ const city = {
   name: `Amsterdam`,
 };
 
-it(`Should Main render correctly`, () => {
+it(`Should MainEmpty render correctly`, () => {
   const store = mockStore({
     currentOffer: null,
     hoveredOffer: null,

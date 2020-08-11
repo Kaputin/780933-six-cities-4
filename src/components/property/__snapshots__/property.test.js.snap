@@ -106,13 +106,20 @@ Array [
               >
                 Beautiful & luxurious apartment at great location
               </h1>
-              <button
-                className="property__bookmark-button button"
-                type="button"
+              <a
+                className=" property__bookmark-button button"
+                href="/login"
+                onClick={[Function]}
               >
                 <svg
                   className="property__bookmark-icon"
                   height="33"
+                  style={
+                    Object {
+                      "fill": "",
+                      "stroke": "",
+                    }
+                  }
                   width="31"
                 >
                   <use
@@ -124,7 +131,7 @@ Array [
                 >
                   To bookmarks
                 </span>
-              </button>
+              </a>
             </div>
             <div
               className="property__rating rating"
@@ -480,9 +487,10 @@ Array [
                       / night
                     </span>
                   </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
+                  <a
+                    className=" place-card__bookmark-button button"
+                    href="/login"
+                    onClick={[Function]}
                   >
                     <svg
                       className="place-card__bookmark-icon"
@@ -498,7 +506,7 @@ Array [
                     >
                       To bookmarks
                     </span>
-                  </button>
+                  </a>
                 </div>
                 <div
                   className="place-card__rating rating"
@@ -578,9 +586,10 @@ Array [
                       / night
                     </span>
                   </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
+                  <a
+                    className=" place-card__bookmark-button button"
+                    href="/login"
+                    onClick={[Function]}
                   >
                     <svg
                       className="place-card__bookmark-icon"
@@ -596,7 +605,7 @@ Array [
                     >
                       To bookmarks
                     </span>
-                  </button>
+                  </a>
                 </div>
                 <div
                   className="place-card__rating rating"

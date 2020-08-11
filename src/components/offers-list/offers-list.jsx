@@ -6,7 +6,7 @@ import {OfferPropTypes} from "../../propTypes.js";
 export const OffersList = ({offers}) => {
 
   return (
-    <div className={`cities__places-list places__list tabs__content`}>
+    <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) =>
         <PlaceCard
           offer={offer}

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {Header} from "./header.jsx";
+import {FavoritesLocationsItems} from "./favorites-locations-items.jsx";
 import {AuthorizationStatus} from "../../const.js";
 import {NameSpace} from "../../reducer/name-space.js";
 import thunk from "redux-thunk";
@@ -132,7 +132,7 @@ const citiesTest = [
   }
 ];
 
-it(`Should Header render correctly`, () => {
+it(`Should FavoritesLocationsItems render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
       selectedCity: citiesTest[0],
@@ -155,12 +155,15 @@ it(`Should Header render correctly`, () => {
     .create(
         <Provider store={store}>
           <Router>
-            <Header
-              userProfile={{}}
-              authorizationStatus={AuthorizationStatus.NO_AUTH}
-            />
+            <FavoritesLocationsItems
+              offers={selectedOffers}
+              city={citiesTest[0]}
+            />,
           </Router>
-        </Provider>)
+        </Provider>,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

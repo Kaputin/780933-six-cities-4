@@ -132,39 +132,6 @@ const citiesTest = [
   }
 ];
 
-// it(`Render App`, () => {
-//   const store = mockStore({
-//     [NameSpace.STATE]: {
-//       selectedCity: citiesTest[0],
-//       selectedSortingOptions: `Popular`,
-//       hoveredOffer: null,
-//     },
-//     [NameSpace.DATA]: {
-//       selectedOffers,
-//       cities: citiesTest,
-//       nearOffers: [],
-//       commentsCurrentOffer: [],
-//     },
-//     [NameSpace.USER]: {
-//       authorizationStatus: AuthorizationStatus.NO_AUTH,
-//       userProfile: {},
-//     },
-//   });
-//
-//   const tree = renderer
-//     .create(
-//         <Provider store={store}>
-//           <App
-//             selectedCityOffers={selectedOffers}
-//             selectedCity={citiesTest[0]}/>,
-//         </Provider>,
-//         {
-//           createNodeMock: () => document.createElement(`div`)
-//         })
-//     .toJSON();
-//
-//   expect(tree).toMatchSnapshot();
-// });
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {

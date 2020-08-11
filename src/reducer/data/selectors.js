@@ -5,6 +5,10 @@ export const getOffers = (state) => {
   return state[NameSpace.DATA].offers;
 };
 
+export const getFavoriteOffers = (state) => {
+  return state[NameSpace.DATA].favoriteOffers;
+};
+
 export const getCities = (state) => {
   return state[NameSpace.DATA].cities;
 };

@@ -132,7 +132,7 @@ const citiesTest = [
   }
 ];
 
-it(`Should NearOffersList render correctly`, () => {
+it(`Should SignIn render correctly`, () => {
   const store = mockStore({
     [NameSpace.STATE]: {
       selectedCity: citiesTest[0],
@@ -157,6 +157,7 @@ it(`Should NearOffersList render correctly`, () => {
           <Router>
             <SignIn
               onSubmit={() => {}}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
             />
           </Router>
         </Provider>)

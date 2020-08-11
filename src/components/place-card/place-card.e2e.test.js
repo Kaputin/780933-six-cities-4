@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {PlaceCard} from "./place-card";
+import {AuthorizationStatus} from "../../const.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -43,13 +44,16 @@ const offer = {
 };
 
 const onOfferHover = jest.fn();
+const onBookmarkButtonClick = jest.fn();
 
-describe(`Offer select e2e`, () => {
+describe(`PlaceCard select e2e`, () => {
   it(`Should Offer be selected`, () => {
 
     const placeCard = shallow(
         <PlaceCard
           onOfferHover={onOfferHover}
+          onBookmarkButtonClick={onBookmarkButtonClick}
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
           offer={offer}
           key={offer.id}
           cardClass={`cities__place-card`}
