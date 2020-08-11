@@ -1,4 +1,4 @@
-import {MAX_CITIES_COUNT} from "./const.js";
+import {MAX_CITIES_COUNT, RATING_STAR_WIDTH} from "./const.js";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -19,7 +19,7 @@ export const getUniqueCities = (offers) => {
 
 export const formatDate = (dateString) => new Date(dateString).toLocaleDateString(`en`, {month: `long`, year: `numeric`});
 
-export const formatRating = (rating) => rating * 20 + `%`;
+export const formatRating = (rating) => rating * RATING_STAR_WIDTH + `%`;
 
 export const capitalize = (str) => str.replace(/(^|\s)\S/g, (a) => a.toUpperCase());
 

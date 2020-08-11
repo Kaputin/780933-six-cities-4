@@ -18,3 +18,5 @@ export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 
 export const RATING_TITLES = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
+
+export const RATING_STAR_WIDTH = 20;
