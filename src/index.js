@@ -23,9 +23,6 @@ const store = createStore(
     )
 );
 
-// store.dispatch(DataOperation.loadOffers());
-//
-// store.dispatch(UserOperation.checkAuth());
 
 const WrappedApp = withLoader(App);
 
