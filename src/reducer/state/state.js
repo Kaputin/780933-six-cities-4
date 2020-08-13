@@ -1,5 +1,5 @@
 import {extend} from "../../utils.js";
-import {sortingOptions} from "../../const.js";
+import {SortinTypes} from "../../const.js";
 
 const defaultCity = {
   name: `Amsterdam`,
@@ -12,7 +12,7 @@ const defaultCity = {
 
 const initialState = {
   selectedCity: defaultCity,
-  selectedSortingOptions: sortingOptions[0],
+  selectedSortingOptions: SortinTypes.DEFAULT,
   hoveredOffer: null,
 };
 
@@ -43,7 +43,7 @@ export const reducer = (state = initialState, action) => {
       const city = action.payload;
       return extend(state, {
         selectedCity: city,
-        selectedSortingOptions: sortingOptions[0],
+        selectedSortingOptions: SortinTypes.DEFAULT,
       });
     case ActionType.CHANGE_SORT_OPTION:
       const selectedOptions = action.payload;

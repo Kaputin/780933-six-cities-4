@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {sortingOptions} from "../../const.js";
+import {SortinTypes} from "../../const.js";
 
 export class SortingOptions extends PureComponent {
   render() {
     const {isOpen, selectedSortingOptions, sortOptionClickHandler, sortOptionsListClickHandler} = this.props;
-
+    const sortsKeys = Object.keys(SortinTypes);
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
@@ -16,8 +16,8 @@ export class SortingOptions extends PureComponent {
           </svg>
         </span>
         <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
-          {sortingOptions.map((sortingOption) => (
-            <li key={sortingOption} className={`places__option ${sortingOption === selectedSortingOptions ? `places__option--active` : ``}`} tabIndex="0" onClick={() => sortOptionClickHandler(sortingOption)}>{sortingOption}</li>
+          {sortsKeys.map((sortingOption) => (
+            <li key={sortingOption} className={`places__option ${SortinTypes[sortingOption] === selectedSortingOptions ? `places__option--active` : ``}`} tabIndex="0" onClick={() => sortOptionClickHandler(SortinTypes[sortingOption])}>{SortinTypes[sortingOption]}</li>
           ))}
         </ul>
       </form>

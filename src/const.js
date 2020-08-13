@@ -1,4 +1,9 @@
-export const sortingOptions = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+export const SortinTypes = {
+  DEFAULT: `Popular`,
+  PRICE_TO_HIGH: `Price: low to high`,
+  PRICE_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
+};
 
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
